@@ -23,6 +23,11 @@ return require('packer').startup(function()
         event = 'BufWinEnter'
     }
     use {
+        'akinsho/bufferline.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = "require'core.bufferline'"
+    }
+    use {
         'glepnir/dashboard-nvim',
         config = "require'core.dashboard'",
         event = 'BufWinEnter'
@@ -69,7 +74,7 @@ return require('packer').startup(function()
         after = "nvim-cmp",
         config = "require'core.autopairs'"
     }
-    -- use {'onsails/lspkind-nvim', after="nvim-cmp", config = "require 'core.cmp'"}
+    use {'onsails/lspkind-nvim'}
     use {
         'folke/trouble.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
@@ -97,7 +102,6 @@ return require('packer').startup(function()
         'windwp/nvim-ts-autotag',
         after = 'nvim-treesitter'
     }
-    -- use {'JoosepAlviste/nvim-ts-context-commentstring'}
 
     -- Terminal Integration
     use {
@@ -136,9 +140,11 @@ return require('packer').startup(function()
     }
     use {'andweeb/presence.nvim'}
     use {
-        'akinsho/bufferline.nvim',
-        requires = 'kyazdani42/nvim-web-devicons'
+        'lewis6991/gitsigns.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        },
+        config = "require'core.gitsigns'"
     }
-
 end)
 

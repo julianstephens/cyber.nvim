@@ -18,16 +18,16 @@ cmp.setup({
             vim.fn["vsnip#anonymous"](args.body)
         end
     },
-    -- formatting = {
-    --     format = require("lspkind").cmp_format({
-    --         with_text = true,
-    --         menu = ({
-    --             buffer = "[Buffer]",
-    --             nvim_lsp = "[LSP]",
-    --             vsnip = "[Vsnip]"
-    --         })
-    --     })
-    -- },
+    formatting = {
+        format = require("lspkind").cmp_format({
+            with_text = true,
+            menu = ({
+                buffer = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                vsnip = "[Vsnip]"
+            })
+        })
+    },
     mapping = {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
