@@ -20,3 +20,4 @@
    - `npm i -g prettier`
    - `cargo install stylua`
 4. Treesitter
+`:TSInstall <Tab>` to view available languages
