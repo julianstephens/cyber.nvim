@@ -1,7 +1,9 @@
 # Installation Instructions
 
 1. Packer <br>
-   `git clone --depth 1 https://github.com/wbthomason/packer.nvim\ ~/.local/share/nvim/site/pack/packer/start/packer.nvim`
+   ```
+   git clone --depth 1 https://github.com/wbthomason/packer.nvim\ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+   ```
 2. LSP Config
    - `npm i -g bash-language-server`
    - `npm i -g vscode-langservers-extracted`
