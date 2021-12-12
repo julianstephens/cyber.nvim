@@ -43,10 +43,13 @@ return require('packer').startup(function()
         'neovim/nvim-lspconfig',
         config = "require'core.lspconfig'"
     }
-    use {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = "require'core.null-ls'"
-    }
+    use({ "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+        require("core.null-ls")
+        require("lspconfig")["null-ls"].setup({})
+    end,
+    requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+    })
     -- use {
     --     'glepnir/lspsaga.nvim',
     --     config = "require'core.lspsaga'"
@@ -112,7 +115,8 @@ return require('packer').startup(function()
     -- Navigation
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/plenary.nvim'}}
+        requires = {{'nvim-lua/plenary.nvim'}},
+        config = "require'core.telescope'"
     }
     use {
         'kyazdani42/nvim-tree.lua',

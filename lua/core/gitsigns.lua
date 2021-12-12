@@ -26,17 +26,15 @@ require('gitsigns').setup {
         },
         changedelete = {
             hl = 'GitSignsChange',
-            text = '▎',
+            text = '~',
             numhl = 'GitSignsChangeNr',
             linehl = 'GitSignsChangeLn'
         }
     },
+    signcolumn = true,
     numhl = false,
     linehl = false,
-    keymaps = {
-        noremap = true,
-        buffer = true
-    },
+    keymaps = {},
     watch_gitdir = {
         interval = 1000
     },

@@ -54,11 +54,9 @@ local defaults = {
     ["[q"] = ":cprev<CR>",
     ["<C-q>"] = ":call QuickFixToggle()<CR>",
 
-    --'<leader>w' for saving
+    -- Saving and quitting
     ["<leader>w"] = ":w<CR>",
-    --'<leader>q' for quitting
-    ["<leader>q"] = ":q<CR>",
-    --'<leader>Q' for quit without saving
+    ["<leader>q"] = ":bd<CR>",
     ["<leader>Q"] = ":q!<CR>",
 
     -- Source
@@ -76,6 +74,8 @@ local defaults = {
     ["<leader>/"] = ":CommentToggle<CR>",
     ["mw"] = ":HopWord<CR>",
     ["ml"] = ":HopLineStart<CR>",
+    ["<leader>gg"] = ":Todo<CR>",
+    ["<leader>gt"] = ":Todo g<CR>",
   },
 
   ---@usage change or add keymappings for terminal mode
