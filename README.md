@@ -19,5 +19,5 @@
    - `python3 -m pip install jsontool`
    - `npm i -g prettier`
    - `cargo install stylua`
-4. Treesitter
+4. Treesitter <br>
 `:TSInstall <Tab>` to view available languages
