@@ -43,12 +43,13 @@ return require('packer').startup(function()
         'neovim/nvim-lspconfig',
         config = "require'core.lspconfig'"
     }
-    use({ "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-        require("core.null-ls")
-        require("lspconfig")["null-ls"].setup({})
-    end,
-    requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+            require("core.null-ls")
+            require("lspconfig")["null-ls"].setup({})
+        end,
+        requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
     })
     -- use {
     --     'glepnir/lspsaga.nvim',
@@ -86,6 +87,17 @@ return require('packer').startup(function()
 
     -- Todo
     use 'vuciv/vim-bujo'
+    use {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("todo-comments").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
 
     -- Themes
     use 'folke/tokyonight.nvim'
@@ -145,9 +157,7 @@ return require('packer').startup(function()
     use {'andweeb/presence.nvim'}
     use {
         'lewis6991/gitsigns.nvim',
-        requires = {
-            'nvim-lua/plenary.nvim'
-        },
+        requires = {'nvim-lua/plenary.nvim'},
         config = "require'core.gitsigns'"
     }
 end)

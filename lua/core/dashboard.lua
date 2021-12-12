@@ -13,8 +13,8 @@ vim.g.dashboard_custom_header = {
 vim.g.dashboard_default_executive = "telescope"
 vim.g.dashboard_custom_section = {
   a = {description = {icons.fileNoBg ..     'Find File          '}, command = 'Telescope find_files'},
-  b = {description = {icons.t ..            'Find Word          '}, command = 'Telescope live_grep'},
-  c = {description = {icons.timer ..        'Recents            '}, command = 'Telescope oldfiles'},
+  b = {description = {icons.timer ..        'Recents            '}, command = 'Telescope oldfiles'},
+  c = {description = {icons.t ..            'Find Word          '}, command = 'Telescope live_grep'},
   e = {description = {icons.container ..    'Sync Plugins       '}, command = 'PackerSync'},
   f = {description = {icons.container ..    'Install Plugins    '}, command = 'PackerInstall'},
   h = {description = {icons.container ..    'Exit               '}, command = 'exit'},

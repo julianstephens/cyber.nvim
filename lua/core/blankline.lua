@@ -1,4 +1,4 @@
-local enable_rainbow_colors = true
+local enable_rainbow_colors = false
 
 local function get_char_highlights()
     if enable_rainbow_colors then
