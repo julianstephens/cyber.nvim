@@ -17,10 +17,6 @@ local language_servers = {
     html = {
         enabled = true
     },
-    -- emmet = { enabled = true },
-    tsserver = {
-        enabled = true
-    },
     pyright = {
         enabled = true
     },
@@ -92,6 +88,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations<CR>", opts)
     buf_set_keymap("n", "<leader>T", "<cmd>lua require('telescope.builtin').lsp_type_definitions<CR>", opts)
     buf_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
+    buf_set_keymap("n", "<leader>oi", ":OrganizeImports<CR>", opts)
 
     -- Diagnostics
     buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
@@ -121,6 +118,15 @@ local on_attach = function(client, bufnr)
     client.resolved_capabilities.document_range_formatting = false
 end
 
+local function organize_imports()
+    local params = {
+      command = "_typescript.organizeImports",
+      arguments = {vim.api.nvim_buf_get_name(0)},
+      title = ""
+    }
+    vim.lsp.buf.execute_command(params)
+end
+
 for ls, props in pairs(language_servers) do
     if props.enabled == true then
         lspconfig[ls].setup({
@@ -128,15 +134,27 @@ for ls, props in pairs(language_servers) do
             capabilities = capabilities
         })
     end
-    -- Emmet
-    lspconfig.emmet_ls.setup({
-        filetypes = {"html", "css", "scss"}
-    })
-    -- Null LS
-    lspconfig["null-ls"].setup({
-        on_attach = on_attach
-    })
 end
+
+lspconfig.tsserver.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    commands = {
+      OrganizeImports = {
+        organize_imports,
+        description = "Organize Imports"
+      }
+    }
+}
+
+-- Emmet
+lspconfig.emmet_ls.setup({
+    filetypes = {"html", "css", "scss"}
+})
+-- Null LS
+lspconfig["null-ls"].setup({
+    on_attach = on_attach
+})
 
 local signs = {
     Error = " ",
