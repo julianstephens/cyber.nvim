@@ -12,5 +12,15 @@ require'nvim-treesitter.configs'.setup {
     },
     autotag = {
         enable = true
-    }
+    },
+    textobjects = {
+        lsp_interop = {
+          enable = true,
+          border = 'none',
+          peek_definition_code = {
+            ["gf"] = "@function.outer",
+            ["gf"] = "@class.outer",
+          },
+        },
+    },
 }

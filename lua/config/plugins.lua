@@ -45,11 +45,12 @@ return require('packer').startup(function()
     }
     use({
         "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            require("core.null-ls")
-            require("lspconfig")["null-ls"].setup({})
-        end,
-        requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+        config = "require'core.null-ls'",
+        requires = {"nvim-lua/plenary.nvim"}
+    })
+    use({
+        "jose-elias-alvarez/nvim-lsp-ts-utils",
+        requires = {"nvim-lua/plenary.nvim"}
     })
     -- use {
     --     'glepnir/lspsaga.nvim',
@@ -115,6 +116,10 @@ return require('packer').startup(function()
     }
     use {
         'windwp/nvim-ts-autotag',
+        after = 'nvim-treesitter'
+    }
+    use {
+        'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter'
     }
 

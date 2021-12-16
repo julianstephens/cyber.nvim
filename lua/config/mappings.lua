@@ -63,7 +63,7 @@ local defaults = {
         ["<leader>w"] = ":w<CR>",
         ["<leader>q"] = ":q<CR>",
         ["<leader>Q"] = ":q!<CR>",
-        ["pq"] = ":bd<CR>",
+        ["pq"] = ":bp|bd #<CR>",
 
         -- Source
         ["<leader>s"] = ":source %<CR>",

@@ -78,6 +78,10 @@ local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
+    
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+
     -- Mappings.
     local opts = {
         noremap = true,
@@ -88,7 +92,6 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations<CR>", opts)
     buf_set_keymap("n", "<leader>T", "<cmd>lua require('telescope.builtin').lsp_type_definitions<CR>", opts)
     buf_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
-    buf_set_keymap("n", "<leader>oi", ":OrganizeImports<CR>", opts)
 
     -- Diagnostics
     buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
@@ -109,24 +112,8 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 
     vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })")
-
-    if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-    end
-
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
 end
-
-local function organize_imports()
-    local params = {
-      command = "_typescript.organizeImports",
-      arguments = {vim.api.nvim_buf_get_name(0)},
-      title = ""
-    }
-    vim.lsp.buf.execute_command(params)
-end
-
+ 
 for ls, props in pairs(language_servers) do
     if props.enabled == true then
         lspconfig[ls].setup({
@@ -136,24 +123,31 @@ for ls, props in pairs(language_servers) do
     end
 end
 
+local buf_map = function(bufnr, mode, lhs, rhs, opts)
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+        silent = true,
+    })
+end
 lspconfig.tsserver.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    commands = {
-      OrganizeImports = {
-        organize_imports,
-        description = "Organize Imports"
-      }
-    }
+    on_attach = function(client, bufnr)
+        local ts_utils = require("nvim-lsp-ts-utils")
+        ts_utils.setup({
+            update_imports_on_move = true,
+        })
+        ts_utils.setup_client(client)
+        
+        buf_map(bufnr, "n", "io", ":TSLspOrganize<cr>")
+        buf_map(bufnr, "n", "ia", ":TSLspImportAll<cr>")
+        vim.cmd("autocmd BufWritePre <buffer> TSLspOrganizeSync")
+
+        on_attach(client, bufnr)
+    end,
+    capabilities = capabilities
 }
 
 -- Emmet
 lspconfig.emmet_ls.setup({
     filetypes = {"html", "css", "scss"}
-})
--- Null LS
-lspconfig["null-ls"].setup({
-    on_attach = on_attach
 })
 
 local signs = {

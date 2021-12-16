@@ -1,7 +1,7 @@
 local null_ls = require("null-ls")
 local b = null_ls.builtins
 
-null_ls.config({
+local null_ls_settings = {
     sources = {
         b.formatting.black,
         b.formatting.codespell,
@@ -25,5 +25,11 @@ null_ls.config({
         }),
         b.code_actions.gitsigns,
         b.completion.spell
-    }
-})
+    },
+    on_attach = function(client, bufnr)
+        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    end
+}
+
+-- Null LS
+null_ls.setup(null_ls_settings)
