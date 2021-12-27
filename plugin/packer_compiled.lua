@@ -141,6 +141,16 @@ _G.packer_plugins = {
     path = "/home/julian/.local/share/nvim/site/pack/packer/opt/lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
   },
+  neogen = {
+    config = { "\27LJ\2\2D\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\1\fenabled\2\nsetup\vneogen\frequire\0" },
+    load_after = {
+      ["nvim-treesitter"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/neogen",
+    url = "https://github.com/danymat/neogen"
+  },
   ["null-ls.nvim"] = {
     config = { "require'core.null-ls'" },
     loaded = true,
@@ -158,7 +168,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-vsnip", "nvim-autopairs", "vim-vsnip", "cmp-buffer" },
+    after = { "cmp-vsnip", "nvim-autopairs", "cmp-buffer", "vim-vsnip" },
     config = { "require'core.cmp'" },
     loaded = false,
     needs_bufread = false,
@@ -210,13 +220,22 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    after = { "nvim-ts-autotag", "nvim-ts-rainbow" },
+    after = { "neogen", "nvim-treesitter-textobjects", "nvim-ts-autotag", "nvim-ts-rainbow" },
     config = { "require'core.treesitter'" },
     loaded = false,
     needs_bufread = true,
     only_cond = false,
     path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    load_after = {
+      ["nvim-treesitter"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
   },
   ["nvim-ts-autotag"] = {
     load_after = {
@@ -328,18 +347,18 @@ time([[Config for todo-comments.nvim]], false)
 time([[Config for bufferline.nvim]], true)
 require'core.bufferline'
 time([[Config for bufferline.nvim]], false)
--- Config for: nvim-toggleterm.lua
-time([[Config for nvim-toggleterm.lua]], true)
-require'core.toggleterm'
-time([[Config for nvim-toggleterm.lua]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-require'core.null-ls'
-time([[Config for null-ls.nvim]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 require'core.telescope'
 time([[Config for telescope.nvim]], false)
+-- Config for: null-ls.nvim
+time([[Config for null-ls.nvim]], true)
+require'core.null-ls'
+time([[Config for null-ls.nvim]], false)
+-- Config for: nvim-toggleterm.lua
+time([[Config for nvim-toggleterm.lua]], true)
+require'core.toggleterm'
+time([[Config for nvim-toggleterm.lua]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
@@ -351,7 +370,7 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'nvim-treesitter', 'dashboard-nvim', 'which-key.nvim', 'lualine.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'nvim-treesitter', 'which-key.nvim', 'lualine.nvim', 'dashboard-nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead * ++once lua require("packer.load")({'indent-blankline.nvim', 'nvim-colorizer.lua'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)

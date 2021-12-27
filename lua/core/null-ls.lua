@@ -25,7 +25,7 @@ local null_ls_settings = {
 			},
 		}),
 		b.code_actions.gitsigns,
-		b.completion.spell,
+		-- b.completion.spell,
 	},
 	on_attach = function(client, bufnr)
 		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
@@ -34,4 +34,3 @@ local null_ls_settings = {
 
 -- Null LS
 null_ls.setup(null_ls_settings)
-
