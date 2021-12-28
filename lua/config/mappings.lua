@@ -62,7 +62,7 @@ local defaults = {
 		-- Saving and quitting
 		["<leader>w"] = ":w<CR>",
 		["<leader>q"] = ":q<CR>",
-		["<leader>Q"] = ":q!<CR>",
+		["<leader>qq"] = ":q!<CR>",
 		["pq"] = ":bp|bd #<CR>",
 
 		-- Source
