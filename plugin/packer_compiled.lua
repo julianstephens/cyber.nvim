@@ -220,7 +220,7 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    after = { "neogen", "nvim-treesitter-textobjects", "nvim-ts-autotag", "nvim-ts-rainbow" },
+    after = { "nvim-ts-context-commentstring", "neogen", "nvim-ts-rainbow", "nvim-treesitter-textobjects", "nvim-ts-autotag" },
     config = { "require'core.treesitter'" },
     loaded = false,
     needs_bufread = true,
@@ -245,6 +245,15 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
+  },
+  ["nvim-ts-context-commentstring"] = {
+    load_after = {
+      ["nvim-treesitter"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-ts-context-commentstring",
+    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
   },
   ["nvim-ts-rainbow"] = {
     load_after = {
