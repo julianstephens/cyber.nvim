@@ -13,13 +13,13 @@ local mappings = {
 		b = { "<cmd>Telescope buffers prompt_prefix=🔍<CR>", "Buffers" },
 		t = { ":TodoTelescope<CR>", "Todo" },
 	},
-	["<leader>gh"] = {
+	["<leader>g"] = {
 		name = "+Git",
 		s = { "<cmd>lua require'gitsigns'.stage_hunk()<CR>", "Stage hunk" },
 		u = { "<cmd>lua require'gitsigns'.undo_stage_hunk()<CR>", "Unstage hunk" },
 		r = { "<cmd>lua require'gitsigns'.reset_hunk()<CR>", "Reset hunk" },
 		p = { "<cmd>lua require'gitsigns'.preview_hunk()<CR>", "Preview hunk" },
-		m = { "<cmd>lua require'gitsigns'.blame_line{full=true}()<CR>", "Blame line" },
+		b = { "<cmd>lua require'gitsigns'.blame_line{full=true}()<CR>", "Blame line" },
 	},
 	["<leader>t"] = {
 		name = "+ToggleTerm",
@@ -42,10 +42,11 @@ local mappings = {
 	},
 	["<leader>o"] = {
 		name = "+Trouble",
-		t = { "<cmd>Trouble document_diagnostics<cr>", "View diagnostics" },
+		d = { "<cmd>Trouble document_diagnostics<cr>", "View diagnostics" },
 		w = { "<cmd>Trouble workspace_diagnostics<cr>", "View workspace diagnostics" },
 		q = { "<cmd>Trouble quickfix<cr>", "Quick fix diagnostics" },
 		l = { "<cmd>Trouble loclist<cr>", "View location list" },
+		t = { ":TodoTroublecr>", "View todos" },
 	},
 }
 
