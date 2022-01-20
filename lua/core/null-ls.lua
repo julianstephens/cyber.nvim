@@ -17,9 +17,9 @@ local null_ls_settings = {
 				"svelte",
 				"json",
 				"jsonc",
-				"css",
+				-- "css",
 				"html",
-				"scss",
+				-- "scss",
 				"markdown",
 			},
 		}),
@@ -31,7 +31,7 @@ local null_ls_settings = {
 			vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)
             augroup END
             ]])
 		end
