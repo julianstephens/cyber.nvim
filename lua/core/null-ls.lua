@@ -5,7 +5,6 @@ local null_ls_settings = {
 	sources = {
 		b.formatting.black,
 		b.formatting.codespell,
-		b.formatting.eslint_d,
 		b.formatting.stylelint,
 		b.formatting.stylua,
 		b.diagnostics.codespell,
