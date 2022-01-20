@@ -80,8 +80,8 @@ local defaults = {
 		["<leader>/"] = ":CommentToggle<CR>",
 		["mw"] = ":HopWord<CR>",
 		["ml"] = ":HopLineStart<CR>",
-		["<leader>gg"] = ":Todo<CR>",
-		["<leader>gt"] = ":Todo g<CR>",
+		["<leader>ct"] = ":e Tasks.todo<CR>",
+		["<C-CR>"] = ":ToggleTask<CR>",
 		["<leader>ds"] = ":lua require('neogen').generate()<CR>",
 	},
 

@@ -87,7 +87,8 @@ return require("packer").startup(function()
 	})
 
 	-- Todo
-	use("vuciv/vim-bujo")
+	-- use("vuciv/vim-bujo")
+	use("kvrohit/tasks.nvim")
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",

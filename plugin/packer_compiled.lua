@@ -220,7 +220,7 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    after = { "nvim-ts-context-commentstring", "neogen", "nvim-ts-rainbow", "nvim-treesitter-textobjects", "nvim-ts-autotag" },
+    after = { "nvim-ts-context-commentstring", "nvim-ts-rainbow", "nvim-treesitter-textobjects", "neogen", "nvim-ts-autotag" },
     config = { "require'core.treesitter'" },
     loaded = false,
     needs_bufread = true,
@@ -284,6 +284,11 @@ _G.packer_plugins = {
     path = "/home/julian/.local/share/nvim/site/pack/packer/start/presence.nvim",
     url = "https://github.com/andweeb/presence.nvim"
   },
+  ["tasks.nvim"] = {
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/tasks.nvim",
+    url = "https://github.com/kvrohit/tasks.nvim"
+  },
   ["telescope.nvim"] = {
     config = { "require'core.telescope'" },
     loaded = true,
@@ -306,11 +311,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/julian/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
-  },
-  ["vim-bujo"] = {
-    loaded = true,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/start/vim-bujo",
-    url = "https://github.com/vuciv/vim-bujo"
   },
   ["vim-vsnip"] = {
     load_after = {
