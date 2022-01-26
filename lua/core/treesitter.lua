@@ -1,3 +1,12 @@
+local filetypes = {
+	"html",
+	"htmldjango",
+	"javascript",
+	"javascriptreact",
+	"typescriptreact",
+	"svelte",
+	"vue",
+}
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true, -- false will disable the whole extension
@@ -13,6 +22,7 @@ require("nvim-treesitter.configs").setup({
 	},
 	autotag = {
 		enable = true,
+		filetypes = filetypes,
 	},
 	textobjects = {
 		lsp_interop = {

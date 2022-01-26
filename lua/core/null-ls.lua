@@ -5,7 +5,6 @@ local null_ls_settings = {
 	sources = {
 		b.formatting.black,
 		b.formatting.codespell,
-		b.formatting.stylelint,
 		b.formatting.stylua,
 		b.diagnostics.codespell,
 		b.formatting.prettier.with({
@@ -17,9 +16,10 @@ local null_ls_settings = {
 				"svelte",
 				"json",
 				"jsonc",
-				-- "css",
+				"css",
 				"html",
-				-- "scss",
+				"htmldjango",
+				"scss",
 				"markdown",
 			},
 		}),
