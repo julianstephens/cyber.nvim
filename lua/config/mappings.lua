@@ -60,7 +60,7 @@ local defaults = {
 		-- ["<C-q>"] = ":call QuickFixToggle()<CR>",
 
 		-- Saving and quitting
-		["<leader>w"] = ":w<CR>",
+		["<leader>w"] = ":w!<CR>",
 		["<leader>q"] = ":q<CR>",
 		["<leader>qq"] = ":q!<CR>",
 		["pq"] = ":bp|bd #<CR>",
@@ -76,13 +76,15 @@ local defaults = {
 		["<leader>hh"] = ":nohl<CR>",
 
 		-- Plugins
-		["<leader>e"] = ":NvimTreeToggle<CR>",
+		["<leader>e"] = ":Telescope file_browser<CR>",
 		["<leader>/"] = ":CommentToggle<CR>",
 		["mw"] = ":HopWord<CR>",
 		["ml"] = ":HopLineStart<CR>",
 		["<leader>ct"] = ":e Tasks.todo<CR>",
 		["<C-CR>"] = ":ToggleTask<CR>",
 		["<leader>ds"] = ":lua require('neogen').generate()<CR>",
+		["<leader>rr"] = ":lua require('rust-tools.runnables').runnables()",
+		["<leader>rd"] = ":lua require('rust-tools.debuggables').debuggablesrunnables()",
 	},
 
 	---@usage change or add keymappings for terminal mode

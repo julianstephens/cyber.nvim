@@ -69,6 +69,12 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["alpha-nvim"] = {
+    config = { "require'core.alpha'" },
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
+  },
   ["bufferline.nvim"] = {
     config = { "require'core.bufferline'" },
     loaded = true,
@@ -76,13 +82,8 @@ _G.packer_plugins = {
     url = "https://github.com/akinsho/bufferline.nvim"
   },
   ["cmp-buffer"] = {
-    after_files = { "/home/julian/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/cmp-buffer",
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
   ["cmp-nvim-lsp"] = {
@@ -91,34 +92,15 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   ["cmp-vsnip"] = {
-    after_files = { "/home/julian/.local/share/nvim/site/pack/packer/opt/cmp-vsnip/after/plugin/cmp_vsnip.vim" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/cmp-vsnip",
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
-  },
-  ["dashboard-nvim"] = {
-    config = { "require'core.dashboard'" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/dashboard-nvim",
-    url = "https://github.com/glepnir/dashboard-nvim"
   },
   ["gitsigns.nvim"] = {
     config = { "require'core.gitsigns'" },
     loaded = true,
     path = "/home/julian/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
-  },
-  ["hop.nvim"] = {
-    config = { "\27LJ\2\0021\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\bhop\frequire\0" },
-    loaded = true,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/start/hop.nvim",
-    url = "https://github.com/phaazon/hop.nvim"
   },
   ["indent-blankline.nvim"] = {
     config = { "require'core.blankline'" },
@@ -159,22 +141,16 @@ _G.packer_plugins = {
   },
   ["nvim-autopairs"] = {
     config = { "require'core.autopairs'" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
+    load_after = {},
+    loaded = true,
     needs_bufread = false,
     path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-vsnip", "nvim-autopairs", "cmp-buffer", "vim-vsnip" },
-    config = { "require'core.cmp'" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-cmp",
-    url = "https://github.com/hrsh7th/nvim-cmp"
+    after = { "nvim-autopairs" },
+    loaded = true,
+    only_config = true
   },
   ["nvim-colorizer.lua"] = {
     config = { "require'core.colorizer'" },
@@ -193,6 +169,17 @@ _G.packer_plugins = {
     path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-comment",
     url = "https://github.com/terrortylor/nvim-comment"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    config = { "\27LJ\2\0023\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\ndapui\frequire\0" },
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
   ["nvim-lsp-ts-utils"] = {
     loaded = true,
     path = "/home/julian/.local/share/nvim/site/pack/packer/start/nvim-lsp-ts-utils",
@@ -204,12 +191,6 @@ _G.packer_plugins = {
     path = "/home/julian/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-toggleterm.lua"] = {
-    config = { "require'core.toggleterm'" },
-    loaded = true,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/start/nvim-toggleterm.lua",
-    url = "https://github.com/akinsho/nvim-toggleterm.lua"
-  },
   ["nvim-tree.lua"] = {
     commands = { "NvimTreeToggle" },
     config = { "require'core.nvimtree'" },
@@ -220,10 +201,10 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    after = { "nvim-ts-context-commentstring", "nvim-ts-rainbow", "nvim-treesitter-textobjects", "neogen", "nvim-ts-autotag" },
+    after = { "nvim-ts-context-commentstring", "nvim-ts-autotag", "nvim-ts-rainbow", "neogen", "nvim-treesitter-textobjects" },
     config = { "require'core.treesitter'" },
     loaded = false,
-    needs_bufread = true,
+    needs_bufread = false,
     only_cond = false,
     path = "/home/julian/.local/share/nvim/site/pack/packer/opt/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -289,6 +270,16 @@ _G.packer_plugins = {
     path = "/home/julian/.local/share/nvim/site/pack/packer/start/tasks.nvim",
     url = "https://github.com/kvrohit/tasks.nvim"
   },
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+  },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
   ["telescope.nvim"] = {
     config = { "require'core.telescope'" },
     loaded = true,
@@ -312,13 +303,14 @@ _G.packer_plugins = {
     path = "/home/julian/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
+  ["vim-repeat"] = {
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/vim-repeat",
+    url = "https://github.com/tpope/vim-repeat"
+  },
   ["vim-vsnip"] = {
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/julian/.local/share/nvim/site/pack/packer/opt/vim-vsnip",
+    loaded = true,
+    path = "/home/julian/.local/share/nvim/site/pack/packer/start/vim-vsnip",
     url = "https://github.com/hrsh7th/vim-vsnip"
   },
   ["which-key.nvim"] = {
@@ -332,14 +324,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: hop.nvim
-time([[Config for hop.nvim]], true)
-try_loadstring("\27LJ\2\0021\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\bhop\frequire\0", "config", "hop.nvim")
-time([[Config for hop.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require'core.lspconfig'
-time([[Config for nvim-lspconfig]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require'core.telescope'
+time([[Config for telescope.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require'core.cmp'
+time([[Config for nvim-cmp]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+require'core.alpha'
+time([[Config for alpha-nvim]], false)
 -- Config for: trouble.nvim
 time([[Config for trouble.nvim]], true)
 require'core.trouble'
@@ -356,18 +352,26 @@ time([[Config for todo-comments.nvim]], false)
 time([[Config for bufferline.nvim]], true)
 require'core.bufferline'
 time([[Config for bufferline.nvim]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require'core.telescope'
-time([[Config for telescope.nvim]], false)
+-- Config for: nvim-dap-ui
+time([[Config for nvim-dap-ui]], true)
+try_loadstring("\27LJ\2\0023\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\ndapui\frequire\0", "config", "nvim-dap-ui")
+time([[Config for nvim-dap-ui]], false)
 -- Config for: null-ls.nvim
 time([[Config for null-ls.nvim]], true)
 require'core.null-ls'
 time([[Config for null-ls.nvim]], false)
--- Config for: nvim-toggleterm.lua
-time([[Config for nvim-toggleterm.lua]], true)
-require'core.toggleterm'
-time([[Config for nvim-toggleterm.lua]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require'core.lspconfig'
+time([[Config for nvim-lspconfig]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-autopairs ]]
+
+-- Config for: nvim-autopairs
+require'core.autopairs'
+
+time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
@@ -379,8 +383,7 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'nvim-treesitter', 'which-key.nvim', 'lualine.nvim', 'dashboard-nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'nvim-treesitter', 'which-key.nvim', 'lualine.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead * ++once lua require("packer.load")({'indent-blankline.nvim', 'nvim-colorizer.lua'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
@@ -389,5 +392,6 @@ if should_profile then save_profiles() end
 end)
 
 if not no_errors then
+  error_msg = error_msg:gsub('"', '\\"')
   vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
 end

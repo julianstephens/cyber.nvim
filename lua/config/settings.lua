@@ -74,4 +74,5 @@ cmd([[
 ]])
 
 cmd([[ au BufRead, BufNewFile *.py set autoindent]])
+cmd([[ autocmd FileType go autocmd BufWritePre <buffer> :silent! GoImport ]])
 return M

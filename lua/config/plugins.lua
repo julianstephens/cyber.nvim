@@ -24,19 +24,22 @@ return require("packer").startup(function()
 	})
 	use({
 		"akinsho/bufferline.nvim",
+		tag = "v1.*",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = "require'core.bufferline'",
 	})
 	use({
-		"glepnir/dashboard-nvim",
-		config = "require'core.dashboard'",
-		event = "BufWinEnter",
+		"goolord/alpha-nvim",
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = "require'core.alpha'",
 	})
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		config = "require'core.blankline'",
 		event = "BufRead",
 	})
+	use({ "nvim-telescope/telescope-ui-select.nvim" })
+	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	-- LSP
 	use({
@@ -58,25 +61,22 @@ return require("packer").startup(function()
 	-- }
 	use({
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter *",
+		-- event = "InsertEnter *",
 		config = "require'core.cmp'",
 	})
 	use("hrsh7th/cmp-nvim-lsp")
 	use({
 		"hrsh7th/cmp-buffer",
-		after = "nvim-cmp",
 	})
 	use({
 		"hrsh7th/cmp-vsnip",
-		after = "nvim-cmp",
 	})
 	use({
 		"hrsh7th/vim-vsnip",
-		after = "nvim-cmp",
 	})
 	use({
 		"windwp/nvim-autopairs",
-		after = "nvim-cmp",
+		after = { "nvim-cmp" },
 		config = "require'core.autopairs'",
 	})
 	use({ "onsails/lspkind-nvim" })
@@ -84,6 +84,13 @@ return require("packer").startup(function()
 		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = "require'core.trouble'",
+	})
+	use("mfussenegger/nvim-dap")
+	use({
+		"rcarriga/nvim-dap-ui",
+		config = function()
+			require("dapui").setup()
+		end,
 	})
 
 	-- Todo
@@ -129,10 +136,11 @@ return require("packer").startup(function()
 	})
 
 	-- Terminal Integration
-	use({
-		"akinsho/nvim-toggleterm.lua",
-		config = "require'core.toggleterm'",
-	})
+	-- use({
+	-- 	"akinsho/toggleterm.nvim",
+	-- 	tag = "v1.*",
+	-- 	config = "require'core.toggleterm'",
+	-- })
 
 	-- Navigation
 	use({
@@ -157,13 +165,6 @@ return require("packer").startup(function()
 		event = "BufWinEnter",
 		config = "require'core.whichkey'",
 	})
-	use({
-		"phaazon/hop.nvim",
-		branch = "v1", -- optional but strongly recommended,
-		config = function()
-			require("hop").setup()
-		end,
-	})
 	use({ "andweeb/presence.nvim" })
 	use({
 		"lewis6991/gitsigns.nvim",
@@ -180,4 +181,17 @@ return require("packer").startup(function()
 		after = "nvim-treesitter",
 		-- requires = { "nvim-treesitter/nvim-treesitter" },
 	})
+	use("tpope/vim-repeat")
+	-- use({
+	--     'ggandor/lightspeed.nvim',
+	--     config = "require'core.lightspeed'"
+	--   })
+	-- use({
+	-- 	'phaazon/hop.nvim',
+	-- 	-- branch = 'v1', -- optional but strongly recommended
+	-- 	config = function()
+	-- 	  -- you can configure Hop the way you like here; see :h hop-config
+	-- 	  require'hop'.setup()
+	-- 	end
+	-- })
 end)
