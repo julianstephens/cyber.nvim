@@ -11,6 +11,7 @@ local mappings = {
 		g = { "<cmd>Telescope live_grep prompt_prefix=🔍<CR>", "Grep" },
 		h = { "<cmd>Telescope oldfiles prompt_prefix=🔍<CR>", "History" },
 		b = { "<cmd>Telescope buffers prompt_prefix=🔍<CR>", "Buffers" },
+		p = { ":lua require'telescope'.extensions.project.project{}<CR>", "Projects" },
 		t = { ":TodoTelescope<CR>", "Todo" },
 	},
 	["<leader>g"] = {
@@ -36,9 +37,8 @@ local mappings = {
 	},
 	["<leader>l"] = {
 		name = "+LSP",
-		i = { ":LspInfo<cr>", "View language servers" },
-		-- c = {":PackerClean<cr>", "Clean plugins"},
-		-- u = {":PackerUpdate<cr>", "Update plugins"},
+		i = { ":NullLsInfo<cr>", "View language servers" },
+		l = { ":NullLsLog<cr>", "View language servers" },
 	},
 	["<leader>o"] = {
 		name = "+Trouble",
