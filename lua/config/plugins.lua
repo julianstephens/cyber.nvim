@@ -1,5 +1,17 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 -- Only required if you have packer configured as `opt`
+local fn = vim.fn
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+	packer_bootstrap = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
+end
 vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup(function()
@@ -42,11 +54,12 @@ return require("packer").startup(function()
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 	use({ "nvim-telescope/telescope-project.nvim" })
 
-	-- LSP
+	-- -- LSP
 	use({
 		"neovim/nvim-lspconfig",
 		config = "require'core.lspconfig'",
 	})
+	use("williamboman/nvim-lsp-installer")
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = "require'core.null-ls'",
@@ -66,15 +79,9 @@ return require("packer").startup(function()
 		config = "require'core.cmp'",
 	})
 	use("hrsh7th/cmp-nvim-lsp")
-	use({
-		"hrsh7th/cmp-buffer",
-	})
-	use({
-		"hrsh7th/cmp-vsnip",
-	})
-	use({
-		"hrsh7th/vim-vsnip",
-	})
+	use({ "hrsh7th/cmp-buffer" })
+	use({ "hrsh7th/cmp-vsnip" })
+	use({ "hrsh7th/vim-vsnip" })
 	use({
 		"windwp/nvim-autopairs",
 		after = { "nvim-cmp" },
@@ -86,13 +93,13 @@ return require("packer").startup(function()
 		requires = "kyazdani42/nvim-web-devicons",
 		config = "require'core.trouble'",
 	})
-	use("mfussenegger/nvim-dap")
 	use({
-		"rcarriga/nvim-dap-ui",
+		"ray-x/go.nvim",
 		config = function()
-			require("dapui").setup()
+			require("go").setup()
 		end,
 	})
+	use("ray-x/guihua.lua") -- recommended if need floating window support
 
 	-- Todo
 	-- use("vuciv/vim-bujo")
@@ -109,10 +116,10 @@ return require("packer").startup(function()
 		end,
 	})
 
-	-- Themes
+	-- -- Themes
 	use("folke/tokyonight.nvim")
 
-	-- Tree-Sitter
+	-- -- Tree-Sitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		event = "BufWinEnter",
@@ -135,15 +142,15 @@ return require("packer").startup(function()
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		after = "nvim-treesitter",
 	})
+	use({
+		"nvim-treesitter/nvim-treesitter-context",
+		config = function()
+			require("treesitter-context").setup()
+		end,
+		after = "nvim-treesitter",
+	})
 
-	-- Terminal Integration
-	-- use({
-	-- 	"akinsho/toggleterm.nvim",
-	-- 	tag = "v1.*",
-	-- 	config = "require'core.toggleterm'",
-	-- })
-
-	-- Navigation
+	-- -- Navigation
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
@@ -154,8 +161,7 @@ return require("packer").startup(function()
 		cmd = "NvimTreeToggle",
 		config = "require'core.nvimtree'",
 	})
-
-	-- Miscellaneous
+	-- -- Miscellaneous
 	use({
 		"terrortylor/nvim-comment",
 		cmd = "CommentToggle",
@@ -183,16 +189,27 @@ return require("packer").startup(function()
 		-- requires = { "nvim-treesitter/nvim-treesitter" },
 	})
 	use("tpope/vim-repeat")
-	-- use({
-	--     'ggandor/lightspeed.nvim',
-	--     config = "require'core.lightspeed'"
-	--   })
-	-- use({
-	-- 	"phaazon/hop.nvim",
-	-- 	-- branch = 'v1', -- optional but strongly recommended
-	-- 	config = function()
-	-- 		-- you can configure Hop the way you like here; see :h hop-config
-	-- 		require("hop").setup()
-	-- 	end,
-	-- })
+	use({ "mrjones2014/legendary.nvim" })
+	use({
+		"akinsho/toggleterm.nvim",
+		tag = "v1.*",
+		config = function()
+			require("toggleterm").setup()
+		end,
+	})
+	use({
+		"ggandor/lightspeed.nvim",
+		config = "require'core.lightspeed'",
+	})
+	use({
+		"phaazon/hop.nvim",
+		-- branch = 'v1', -- optional but strongly recommended
+		config = function()
+			-- you can configure Hop the way you like here; see :h hop-config
+			require("hop").setup()
+		end,
+	})
+	if packer_bootstrap then
+		require("packer").sync()
+	end
 end)

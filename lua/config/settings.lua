@@ -23,7 +23,8 @@ M.load_options = function()
 		showmode = false, -- we don't need to see things like -- INSERT -- anymore
 		showtabline = 2, -- always show tabs
 		smartcase = true, -- smart case
-		smartindent = true, -- make indenting smarter again
+		autoindent = true,
+		smartindent = false, -- make indenting smarter again
 		splitbelow = true, -- force all horizontal splits to go below current window
 		splitright = false, -- force all vertical splits to go to the right of current window
 		swapfile = false, -- creates a swapfile
@@ -66,6 +67,8 @@ cmd([[
 
 cmd([[colorscheme tokyonight]])
 
+cmd([[filetype plugin indent on]])
+
 cmd([[
     augroup NoAutoComment
       au!
@@ -73,6 +76,7 @@ cmd([[
     augroup end
 ]])
 
-cmd([[ au BufRead, BufNewFile *.py set autoindent]])
-cmd([[ autocmd FileType go autocmd BufWritePre <buffer> :silent! GoImport ]])
+-- cmd([[ au BufRead, BufNewFile *.py set autoindent]])
+cmd([[autocmd BufWritePre *.go :silent! lua require('go.format').goimport()]])
+-- cmd([[ autocmd FileType go autocmd BufWritePre <buffer> :silent! GoImport ]])
 return M

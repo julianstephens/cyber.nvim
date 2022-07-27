@@ -7,12 +7,17 @@ require("telescope").setup({
 	qflist_previewer = previewers.vim_buffer_qflist.new,
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown({
-				-- even more opts
-			}),
+			require("telescope.themes").get_cursor(),
 		},
 		file_browser = {
 			theme = "dropdown",
+		},
+	},
+	defaults = {
+		file_ignore_patterns = {
+			"node_modules",
+			"dist",
+			"*.spec.ts",
 		},
 	},
 })

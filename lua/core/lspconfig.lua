@@ -33,7 +33,7 @@ local language_servers = {
 		enabled = true,
 	},
 	solargraph = {
-		enabled = false,
+		enabled = true,
 	},
 	vuels = {
 		enabled = false,
@@ -62,7 +62,32 @@ local language_servers = {
 	rust_analyzer = {
 		enabled = true,
 	},
+	prismals = {
+		enabled = true,
+	},
+	angularls = {
+		enabled = true,
+	},
+	tailwindcss = {
+		enabled = true,
+	},
 }
+
+local function get_python_path(workspace)
+	-- Use activated virtualenv.
+	if vim.env.VIRTUAL_ENV then
+		return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+	end
+	-- Find and use virtualenv in workspace directory.
+	for _, pattern in ipairs({ "*", ".*" }) do
+		local match = vim.fn.glob(path.join(workspace, pattern, "pyvenv.cfg"))
+		if match ~= "" then
+			return path.join(path.dirname(match), "bin", "python")
+		end
+	end
+	-- Fallback to system Python.
+	return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+end
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -96,26 +121,15 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "ge", "<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>", opts)
 	buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 	buf_set_keymap("n", "<C-;>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-	buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap(
-		"n",
-		"<leader>oa",
-		"<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<CR>",
-		opts
-	)
+	buf_set_keymap("n", "grn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	buf_set_keymap("n", "oa", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	-- buf_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-	buf_set_keymap("n", "<C-f>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	buf_set_keymap("n", "<C-f>", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
 	-- Workspaces
 	buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-
-	-- Debugging
-	-- buf_set_keymap("n", "dp", "<cmd>lua require('dap').toggle_breakpoint()", opts)
-	-- buf_set_keymap("n", "dr", "<cmd>lua require('dap').continue()", opts)
-	-- buf_set_keymap("n", "dso", "<cmd>lua require('dap').step_over()", opts)
-	-- buf_set_keymap("n", "dsi", "<cmd>lua require('dap').step_into()", opts)
 
 	vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })")
 end
@@ -134,8 +148,13 @@ local buf_map = function(bufnr, mode, lhs, rhs, opts)
 		silent = true,
 	})
 end
+
+-- tserver
 lspconfig.tsserver.setup({
 	on_attach = function(client, bufnr)
+		client.server_capabilities.document_formatting = false
+		client.server_capabilities.document_range_formatting = false
+
 		local ts_utils = require("nvim-lsp-ts-utils")
 		ts_utils.setup({
 			update_imports_on_move = true,
@@ -148,8 +167,19 @@ lspconfig.tsserver.setup({
 
 		on_attach(client, bufnr)
 	end,
+	handlers = {
+		["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			-- Disable virtual_text
+			virtual_text = false,
+		}),
+	},
 	capabilities = capabilities,
 })
+
+vim.diagnostic.config({ virtual_text = false })
+
+-- pyright
+-- lspconfig.pyright.setup({})
 
 -- Emmet
 lspconfig.emmet_ls.setup({

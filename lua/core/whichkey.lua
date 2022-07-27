@@ -7,6 +7,7 @@ local mappings = {
 	["<leader>f"] = {
 		name = "+Files",
 		f = { "<cmd>Telescope find_files prompt_prefix=🔍<cr>", "Finder" },
+		i = { "<cmd>Telescope find_files hidden=true no_ignore=true prompt_prefix=🔍<cr>", "Show Ignore" },
 		e = { "<cmd>Telescope file_browser prompt_prefix=🔍<CR>", "Explorer" },
 		g = { "<cmd>Telescope live_grep prompt_prefix=🔍<CR>", "Grep" },
 		h = { "<cmd>Telescope oldfiles prompt_prefix=🔍<CR>", "History" },
@@ -46,7 +47,7 @@ local mappings = {
 		w = { "<cmd>Trouble workspace_diagnostics<cr>", "View workspace diagnostics" },
 		q = { "<cmd>Trouble quickfix<cr>", "Quick fix diagnostics" },
 		l = { "<cmd>Trouble loclist<cr>", "View location list" },
-		t = { ":TodoTroublecr>", "View todos" },
+		t = { ":TodoTrouble<cr>", "View todos" },
 	},
 }
 

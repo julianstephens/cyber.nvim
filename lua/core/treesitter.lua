@@ -4,16 +4,21 @@ local filetypes = {
 	"javascript",
 	"javascriptreact",
 	"typescriptreact",
+	"tsx",
+	"jsx",
 	"svelte",
 	"vue",
+	"eruby",
+	"erb",
+	"html.erb",
 }
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true, -- false will disable the whole extension
 	},
 	indent = {
-		enable = true,
-		disable = { "python" },
+		enable = false,
+		disable = { "python", "typescript" },
 	},
 	rainbow = {
 		enable = true,
@@ -36,5 +41,6 @@ require("nvim-treesitter.configs").setup({
 	},
 	context_commentstring = {
 		enable = true,
+		enable_autocmd = false,
 	},
 })

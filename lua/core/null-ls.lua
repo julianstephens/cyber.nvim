@@ -1,4 +1,5 @@
 local null_ls = require("null-ls")
+local helpers = null_ls.helpers
 local b = null_ls.builtins
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -30,13 +31,38 @@ local null_ls_settings = {
 				"always",
 			},
 		}),
-		b.formatting.gofmt,
-		-- b.formatting.remark.with({
-		-- 	args = { "-u", "lint", "-u", "lint-maximum-line-length" },
+		-- b.formatting.gofmt,
+		b.formatting.standardrb,
+		b.formatting.erb_lint,
+		-- b.formatting.rustywind.with({
+		-- 	filetypes = {
+		-- 		"javascript",
+		-- 		"javascriptreact",
+		-- 		"typescript",
+		-- 		"typescriptreact",
+		-- 		"vue",
+		-- 		"svelte",
+		-- 		"html",
+		-- 		"erb",
+		-- 		"eruby",
+		-- 	},
 		-- }),
+		b.code_actions.eslint.with({
+			filetypes = {
+				"typescriptreact",
+				"javascriptreact",
+			},
+		}),
+		b.diagnostics.erb_lint,
 		b.code_actions.gitsigns,
 		b.code_actions.proselint,
 		b.hover.dictionary,
+		b.diagnostics.eslint.with({
+			filetypes = {
+				"typescriptreact",
+				"javascriptreact",
+			},
+		}),
 		-- b.completion.spell,
 	},
 	on_attach = function(client, bufnr)
@@ -56,3 +82,4 @@ local null_ls_settings = {
 
 -- Null LS
 null_ls.setup(null_ls_settings)
+-- null_ls.register(pfmt)
