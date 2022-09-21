@@ -9,10 +9,13 @@ local mappings = {
 		f = { "<cmd>Telescope find_files prompt_prefix=🔍<cr>", "Finder" },
 		i = { "<cmd>Telescope find_files hidden=true no_ignore=true prompt_prefix=🔍<cr>", "Show Ignore" },
 		e = { "<cmd>Telescope file_browser prompt_prefix=🔍<CR>", "Explorer" },
+		n = { ":Neotree<CR>", "File Tree" },
 		g = { "<cmd>Telescope live_grep prompt_prefix=🔍<CR>", "Grep" },
+		r = { "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>", "Recent" },
 		h = { "<cmd>Telescope oldfiles prompt_prefix=🔍<CR>", "History" },
 		b = { "<cmd>Telescope buffers prompt_prefix=🔍<CR>", "Buffers" },
 		p = { ":lua require'telescope'.extensions.project.project{}<CR>", "Projects" },
+		v = { ":Telescope env<CR>", "Env Vars" },
 		t = { ":TodoTelescope<CR>", "Todo" },
 	},
 	["<leader>g"] = {

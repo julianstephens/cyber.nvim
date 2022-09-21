@@ -1,0 +1,10 @@
+services:
+  nvim-devbox:
+    image: jgstephens/cyber-nvim
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - GH_USER=${GH_USER}
+    volumes:
+      - ${PROJECT_DIR}:/root/workspace

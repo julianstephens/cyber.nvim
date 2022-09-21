@@ -9,7 +9,6 @@ local null_ls_settings = {
 		b.formatting.black,
 		b.formatting.codespell,
 		b.formatting.stylua,
-		-- b.diagnostics.codespell,
 		b.formatting.clang_format,
 		b.formatting.prettier.with({
 			filetypes = {
@@ -31,22 +30,8 @@ local null_ls_settings = {
 				"always",
 			},
 		}),
-		-- b.formatting.gofmt,
 		b.formatting.standardrb,
 		b.formatting.erb_lint,
-		-- b.formatting.rustywind.with({
-		-- 	filetypes = {
-		-- 		"javascript",
-		-- 		"javascriptreact",
-		-- 		"typescript",
-		-- 		"typescriptreact",
-		-- 		"vue",
-		-- 		"svelte",
-		-- 		"html",
-		-- 		"erb",
-		-- 		"eruby",
-		-- 	},
-		-- }),
 		b.code_actions.eslint.with({
 			filetypes = {
 				"typescriptreact",
@@ -63,7 +48,6 @@ local null_ls_settings = {
 				"javascriptreact",
 			},
 		}),
-		-- b.completion.spell,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
@@ -82,4 +66,3 @@ local null_ls_settings = {
 
 -- Null LS
 null_ls.setup(null_ls_settings)
--- null_ls.register(pfmt)

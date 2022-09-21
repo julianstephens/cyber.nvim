@@ -21,7 +21,7 @@ vim.g.dashboard_default_executive = "telescope"
 dashboard.section.buttons.val = {
   dashboard.button("e", icons.pencil ..       'New File           ', ":ene <BAR> startinsert <CR>"),
   dashboard.button("f", icons.fileNoBg ..     'Find File          ', ":Telescope find_files<CR>"),
-  dashboard.button("r", icons.timer ..        'Recents            ', ":Telescope oldfiles<CR>"),
+  dashboard.button("r", icons.timer ..        'Recents            ', "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>"),
   dashboard.button("g", icons.t ..            'Find Word          ', ":Telescope live_grep<CR>"),
   dashboard.button("s", icons.container ..    'Sync Plugins       ', ":PackerSync<CR>"),
   dashboard.button("c", icons.info ..         'Checkhealth        ', ":checkhealth<CR>"),

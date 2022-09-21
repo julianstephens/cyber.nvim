@@ -1,0 +1,36 @@
+[user]
+    name = Julian Stephens
+    email = julian@julianstephens.net
+    username = julianstephens
+
+[core]
+    editor = nvim
+	autocrlf = false
+
+[alias]
+    br = branch
+    c = commit
+    cm = commit -m
+    cam = commit -am
+    cl = clone
+    cp = cherry-pick
+    cv = cherry -v
+    d = diff
+    co = checkout
+    ps = push
+    psom = push origin main
+    psuom = push -u origin main
+    pl = pull
+    rv = remote -v
+    ra = remote add
+    st = status
+    unstage = restore --staged 
+    change = branch -m master main
+    reset = reset --soft HEAD~1
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[init]
+	defaultBranch = main

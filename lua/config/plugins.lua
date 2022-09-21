@@ -36,7 +36,7 @@ return require("packer").startup(function()
 	})
 	use({
 		"akinsho/bufferline.nvim",
-		tag = "v1.*",
+		tag = "v2.*",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = "require'core.bufferline'",
 	})
@@ -53,6 +53,14 @@ return require("packer").startup(function()
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 	use({ "nvim-telescope/telescope-project.nvim" })
+  use({ "LinArcX/telescope-env.nvim" })
+  use({
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    requires = {"kkharji/sqlite.lua"}
+  })
 
 	-- -- LSP
 	use({
@@ -69,13 +77,8 @@ return require("packer").startup(function()
 		"jose-elias-alvarez/nvim-lsp-ts-utils",
 		requires = { "nvim-lua/plenary.nvim" },
 	})
-	-- use {
-	--     'glepnir/lspsaga.nvim',
-	--     config = "require'core.lspsaga'"
-	-- }
 	use({
 		"hrsh7th/nvim-cmp",
-		-- event = "InsertEnter *",
 		config = "require'core.cmp'",
 	})
 	use("hrsh7th/cmp-nvim-lsp")
@@ -102,17 +105,12 @@ return require("packer").startup(function()
 	use("ray-x/guihua.lua") -- recommended if need floating window support
 
 	-- Todo
-	-- use("vuciv/vim-bujo")
 	use("kvrohit/tasks.nvim")
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = function()
-			require("todo-comments").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("todo-comments").setup()
 		end,
 	})
 
@@ -161,7 +159,16 @@ return require("packer").startup(function()
 		cmd = "NvimTreeToggle",
 		config = "require'core.nvimtree'",
 	})
+
 	-- -- Miscellaneous
+	use({
+		"ellisonleao/glow.nvim",
+		config = function()
+			require("glow").setup({
+				width = 120,
+			})
+		end,
+	})
 	use({
 		"terrortylor/nvim-comment",
 		cmd = "CommentToggle",
@@ -186,13 +193,12 @@ return require("packer").startup(function()
 			})
 		end,
 		after = "nvim-treesitter",
-		-- requires = { "nvim-treesitter/nvim-treesitter" },
 	})
 	use("tpope/vim-repeat")
 	use({ "mrjones2014/legendary.nvim" })
 	use({
 		"akinsho/toggleterm.nvim",
-		tag = "v1.*",
+		tag = "*",
 		config = function()
 			require("toggleterm").setup()
 		end,
@@ -203,10 +209,34 @@ return require("packer").startup(function()
 	})
 	use({
 		"phaazon/hop.nvim",
-		-- branch = 'v1', -- optional but strongly recommended
 		config = function()
-			-- you can configure Hop the way you like here; see :h hop-config
 			require("hop").setup()
+		end,
+	})
+
+	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		},
+		config = function()
+			require("neo-tree").setup({
+				window = {
+					filesystem = {
+						filtered_items = {
+							hide_dotfiles = false,
+							hide_hidden = false,
+							hide_by_name = {
+								"node_modules",
+							},
+						},
+					},
+				},
+			})
 		end,
 	})
 	if packer_bootstrap then
