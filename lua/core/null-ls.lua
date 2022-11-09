@@ -23,7 +23,7 @@ local null_ls_settings = {
 				"html",
 				"htmldjango",
 				"scss",
-				"markdown",
+				-- "markdown",
 			},
 			extra_args = {
 				"--prose-wrap",

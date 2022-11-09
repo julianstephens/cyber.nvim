@@ -1,6 +1,6 @@
 require("nvim-lsp-installer").setup()
 -- Enable (broadcasting) snippet capability for completion
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local lspconfig = require("lspconfig")
@@ -153,7 +153,7 @@ end
 -- tserver
 lspconfig.tsserver.setup({
 	on_attach = function(client, bufnr)
-		client.server_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.document_range_formatting = false
 
 		local ts_utils = require("nvim-lsp-ts-utils")

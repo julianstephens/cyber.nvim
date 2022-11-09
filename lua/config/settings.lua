@@ -76,6 +76,8 @@ cmd([[
     augroup end
 ]])
 
+cmd([[let g:aw_apiurl_host = '172.24.192.1']])
+
 -- cmd([[ au BufRead, BufNewFile *.py set autoindent]])
 cmd([[autocmd BufWritePre *.go :silent! lua require('go.format').goimport()]])
 -- cmd([[ autocmd FileType go autocmd BufWritePre <buffer> :silent! GoImport ]])

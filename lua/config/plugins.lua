@@ -50,17 +50,24 @@ return require("packer").startup(function()
 		config = "require'core.blankline'",
 		event = "BufRead",
 	})
+
+	-- Telescope
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-github.nvim" } },
+		config = "require'core.telescope'",
+	})
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 	use({ "nvim-telescope/telescope-project.nvim" })
-  use({ "LinArcX/telescope-env.nvim" })
-  use({
-    "nvim-telescope/telescope-frecency.nvim",
-    config = function()
-      require"telescope".load_extension("frecency")
-    end,
-    requires = {"kkharji/sqlite.lua"}
-  })
+	use({ "LinArcX/telescope-env.nvim" })
+	use({
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function()
+			require("telescope").load_extension("frecency")
+		end,
+		requires = { "kkharji/sqlite.lua" },
+	})
 
 	-- -- LSP
 	use({
@@ -117,7 +124,7 @@ return require("packer").startup(function()
 	-- -- Themes
 	use("folke/tokyonight.nvim")
 
-	-- -- Tree-Sitter
+	-- -- TreeSitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		event = "BufWinEnter",
@@ -148,17 +155,20 @@ return require("packer").startup(function()
 		after = "nvim-treesitter",
 	})
 
-	-- -- Navigation
+	-- Writing
+	use("junegunn/goyo.vim")
+	use("junegunn/limelight.vim")
 	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
-		config = "require'core.telescope'",
+		"preservim/vim-pencil",
+		config = "require'core.pencil'",
 	})
 	use({
-		"kyazdani42/nvim-tree.lua",
-		cmd = "NvimTreeToggle",
-		config = "require'core.nvimtree'",
+		"gaoDean/autolist.nvim",
+		config = function()
+			require("autolist").setup({})
+		end,
 	})
+	use("allen-mack/nvim-table-md")
 
 	-- -- Miscellaneous
 	use({
@@ -179,7 +189,7 @@ return require("packer").startup(function()
 		event = "BufWinEnter",
 		config = "require'core.whichkey'",
 	})
-	use({ "andweeb/presence.nvim" })
+	-- use({ "andweeb/presence.nvim" })
 	use({
 		"lewis6991/gitsigns.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
@@ -190,6 +200,13 @@ return require("packer").startup(function()
 		config = function()
 			require("neogen").setup({
 				enabled = true,
+				languages = {
+					typescript = {
+						template = {
+							annotation_convention = "tsdoc",
+						},
+					},
+				},
 			})
 		end,
 		after = "nvim-treesitter",
@@ -213,6 +230,8 @@ return require("packer").startup(function()
 			require("hop").setup()
 		end,
 	})
+
+	use("ActivityWatch/aw-watcher-vim")
 
 	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 	use({
