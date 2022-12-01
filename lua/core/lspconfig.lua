@@ -72,6 +72,9 @@ local language_servers = {
 	tailwindcss = {
 		enabled = true,
 	},
+	svelte = {
+		enabled = true,
+	},
 }
 
 local function get_python_path(workspace)

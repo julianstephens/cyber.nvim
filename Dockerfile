@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
-FROM alpine
+FROM ubuntu:jammy
 
 EXPOSE 8080 8081 8082 8083 8084 8085
 
 # Install packages
-RUN apk add --no-cache \
+RUN apt update && apt upgrade -y
+RUN apt install --no-cache -y \
     bash \
     build-base \
     libffi-dev \
@@ -41,8 +42,18 @@ RUN apk add --no-cache \
 
 RUN ln -sf /bin/bash /bin/sh
 
+# Install homebrew
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install font
+RUN brew tap homebrew/cask-fonts
+RUN brew install font-cascadia-code-pl
+
+# Install GH cli
+RUN brew install gh
+
 # Install neovim and lsp's
-RUN apk add neovim
+RUN brew install neovim
 RUN pip3 install pynvim black jsontool
 RUN npm i -g neovim prettier bash-language-server vscode-langservers-extracted pyright typescript typescript-language-server vim-language-server yaml-language-server emmet-ls eslint
 
@@ -74,6 +85,9 @@ ENV GOROOT /usr/lib/go
 ENV GOPATH /go
 ENV PATH /go/bin:$PATH
 ARG GH_USER
+
+# Install poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
 RUN mkdir -p ${GOPATH}/src/github.com/$GH_USER ${GOPATH}/bin
 RUN go install golang.org/x/tools/gopls@latest
