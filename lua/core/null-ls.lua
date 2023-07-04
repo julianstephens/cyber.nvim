@@ -7,6 +7,7 @@ local null_ls_settings = {
 	debug = true,
 	sources = {
 		b.formatting.black,
+		b.formatting.isort,
 		b.formatting.codespell,
 		b.formatting.stylua,
 		b.formatting.clang_format,
@@ -32,6 +33,7 @@ local null_ls_settings = {
 		}),
 		b.formatting.standardrb,
 		b.formatting.erb_lint,
+    b.formatting.prismaFmt,
 		b.code_actions.eslint.with({
 			filetypes = {
 				"typescriptreact",

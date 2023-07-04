@@ -34,7 +34,6 @@ require('gitsigns').setup {
     signcolumn = true,
     numhl = false,
     linehl = false,
-    keymaps = {},
     watch_gitdir = {
         interval = 1000
     },

@@ -11,7 +11,6 @@ local mappings = {
 		e = { "<cmd>Telescope file_browser prompt_prefix=🔍<CR>", "Explorer" },
 		n = { ":Neotree<CR>", "File Tree" },
 		g = { "<cmd>Telescope live_grep prompt_prefix=🔍<CR>", "Grep" },
-		r = { "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>", "Recent" },
 		h = { "<cmd>Telescope oldfiles prompt_prefix=🔍<CR>", "History" },
 		b = { "<cmd>Telescope buffers prompt_prefix=🔍<CR>", "Buffers" },
 		p = { ":lua require'telescope'.extensions.project.project{}<CR>", "Projects" },
@@ -59,6 +58,12 @@ local mappings = {
 		l = { "<cmd>Trouble loclist<CR>", "View location list" },
 		t = { ":TodoTrouble<CR>", "View todos" },
 	},
+  ["<leader>n"] = {
+    name = "+Flote", 
+    n = { ":Flote<CR>", "Open project note" },
+    g = { ":Flote global<CR>", "Open global note" },
+    l = { ":Flote manage<CR>", "View all notes"},
+  }, 
 	["m"] = {
 		name = "+Markdown",
 		g = { ":Goyo<CR>", "Goyo" },

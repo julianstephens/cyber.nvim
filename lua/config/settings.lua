@@ -5,6 +5,7 @@ local M = {}
 
 M.load_options = function()
 	local default_options = {
+    background = "dark",
 		backup = false, -- creates a backup file
 		-- clipboard = "unnamedplus", -- allows neovim to access the system clipboard
 		cmdheight = 2, -- more space in the neovim command line for displaying messages
@@ -65,7 +66,7 @@ cmd([[
   augroup end
 ]])
 
-cmd([[colorscheme tokyonight]])
+cmd([[colorscheme tokyodark]])
 
 cmd([[filetype plugin indent on]])
 
@@ -76,7 +77,13 @@ cmd([[
     augroup end
 ]])
 
-cmd([[let g:aw_apiurl_host = '172.24.192.1']])
+cmd([[
+  if exists("+termguicolors")
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+  endif
+]])
 
 -- cmd([[ au BufRead, BufNewFile *.py set autoindent]])
 cmd([[autocmd BufWritePre *.go :silent! lua require('go.format').goimport()]])

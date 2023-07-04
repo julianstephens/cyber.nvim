@@ -44,7 +44,7 @@ local defaults = {
 		["<C-k>"] = "<C-w>k",
 		["<C-l>"] = "<C-w>l",
 
-		-- Resize with arrows
+		-- Resize wCmd>lua require('telescope').extensions.frecency.frecency()ith arrows
 		["<A-j"] = ":resize -2<CR>",
 		["<A-k>"] = ":resize +2<CR>",
 		["<A-h>"] = ":vertical resize -2<CR>",
@@ -58,6 +58,11 @@ local defaults = {
 		-- ["]q"] = ":cnext<CR>",
 		-- ["[q"] = ":cprev<CR>",
 		-- ["<C-q>"] = ":call QuickFixToggle()<CR>",
+
+    -- Copy to clipboard
+    ["<leader>y"] = '"+y',
+    ["<leader>p"] = '"+p',
+    ["<leader>d"] = '"+d',
 
 		-- Saving and quitting
 		["<leader>w"] = ":w!<CR>",

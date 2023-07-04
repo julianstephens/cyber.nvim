@@ -60,14 +60,6 @@ return require("packer").startup(function()
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 	use({ "nvim-telescope/telescope-project.nvim" })
-	use({ "LinArcX/telescope-env.nvim" })
-	use({
-		"nvim-telescope/telescope-frecency.nvim",
-		config = function()
-			require("telescope").load_extension("frecency")
-		end,
-		requires = { "kkharji/sqlite.lua" },
-	})
 
 	-- -- LSP
 	use({
@@ -112,7 +104,6 @@ return require("packer").startup(function()
 	use("ray-x/guihua.lua") -- recommended if need floating window support
 
 	-- Todo
-	use("kvrohit/tasks.nvim")
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
@@ -120,9 +111,25 @@ return require("packer").startup(function()
 			require("todo-comments").setup()
 		end,
 	})
+	use({
+		"JellyApple102/flote.nvim",
+		config = function()
+			require("flote").setup()
+		end,
+	})
+	use({
+		"nocksock/do.nvim",
+		config = function()
+			require("do").setup({
+				winbar = true,
+				kaomoji_mode = 1,
+			})
+		end,
+	})
 
 	-- -- Themes
 	use("folke/tokyonight.nvim")
+	use("tiagovla/tokyodark.nvim")
 
 	-- -- TreeSitter
 	use({
@@ -130,10 +137,6 @@ return require("packer").startup(function()
 		event = "BufWinEnter",
 		run = ":TSUpdate",
 		config = "require'core.treesitter'",
-	})
-	use({
-		"p00f/nvim-ts-rainbow",
-		after = "nvim-treesitter",
 	})
 	use({
 		"windwp/nvim-ts-autotag",
@@ -189,7 +192,6 @@ return require("packer").startup(function()
 		event = "BufWinEnter",
 		config = "require'core.whichkey'",
 	})
-	-- use({ "andweeb/presence.nvim" })
 	use({
 		"lewis6991/gitsigns.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
@@ -230,8 +232,6 @@ return require("packer").startup(function()
 			require("hop").setup()
 		end,
 	})
-
-	use("ActivityWatch/aw-watcher-vim")
 
 	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 	use({
