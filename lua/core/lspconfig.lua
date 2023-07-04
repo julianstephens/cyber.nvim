@@ -6,8 +6,8 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local lspconfig = require("lspconfig")
 
 local language_servers = {
-	sumneko_lua = {
-		enabled = false,
+	lua_ls = {
+		enabled = true,
 	},
 	bashls = {
 		enabled = true,
