@@ -13,17 +13,35 @@ function M.setup()
   for _, language in ipairs({ "typescript", "javascript" }) do
     require("dap").configurations[language] = {
       {
+        name = "Launch file",
         type = "pwa-node",
         request = "launch",
-        name = "Launch file",
+        args = { "-r", "dotenv/config" },
         program = "${file}",
+        rootPath = "${workspaceFolder}",
         cwd = "${workspaceFolder}",
+        sourceMaps = true,
+        skipFiles = { "<node_internals>/**" },
+        console = "integratedTerminal",
       },
       {
         type = "pwa-node",
-        request = "attach",
+        request = "launch",
+        name = "Launch Current File (with dotenv)",
+        cwd = vim.fn.getcwd(),
+        runtimeArgs = { "-r", "dotenv/config" },
+        runtimeExecutable = "node",
+        args = { "${file}" },
+        skipFiles = { "<node_internals>/**" },
+      },
+      {
         name = "Attach",
+        type = "pwa-node",
+        request = "attach",
         processId = require("dap.utils").pick_process,
+        port = 3000,
+        restart = true,
+        rootPath = "${workspaceFolder}",
         cwd = "${workspaceFolder}",
       },
       {
