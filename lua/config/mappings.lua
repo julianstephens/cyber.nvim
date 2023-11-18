@@ -59,10 +59,10 @@ local defaults = {
 		-- ["[q"] = ":cprev<CR>",
 		-- ["<C-q>"] = ":call QuickFixToggle()<CR>",
 
-    -- Copy to clipboard
-    ["<leader>y"] = '"+y',
-    ["<leader>p"] = '"+p',
-    ["<leader>d"] = '"+d',
+		-- Copy to clipboard
+		["<leader>y"] = '"+y',
+		["<leader>p"] = '"+p',
+		["<leader>d"] = '"+d',
 
 		-- Saving and quitting
 		["<leader>w"] = ":w!<CR>",

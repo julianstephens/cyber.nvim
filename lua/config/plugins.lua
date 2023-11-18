@@ -50,6 +50,7 @@ return require("packer").startup(function()
 		config = "require'core.blankline'",
 		event = "BufRead",
 	})
+	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
 	-- Telescope
 	use({
@@ -67,11 +68,9 @@ return require("packer").startup(function()
 		requires = { { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" } },
 		config = "require'core.lspconfig'",
 	})
-
 	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		config = "require'core.null-ls'",
-		requires = { "nvim-lua/plenary.nvim" },
+		"stevearc/conform.nvim",
+		config = "require'core.conform'",
 	})
 	use({
 		"jose-elias-alvarez/nvim-lsp-ts-utils",
@@ -85,6 +84,14 @@ return require("packer").startup(function()
 	use({ "hrsh7th/cmp-buffer" })
 	use({ "hrsh7th/cmp-vsnip" })
 	use({ "hrsh7th/vim-vsnip" })
+	-- use({
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	-- 	config = function()
+	-- 		require("typescript-tools").setup({})
+	-- 	end,
+	-- })
+
 	use({
 		"windwp/nvim-autopairs",
 		after = { "nvim-cmp" },
@@ -103,7 +110,6 @@ return require("packer").startup(function()
 		end,
 	})
 	use("ray-x/guihua.lua") -- recommended if need floating window support
-	use("marilari88/twoslash-queries.nvim")
 
 	-- Debugging
 	use({
@@ -127,6 +133,7 @@ return require("packer").startup(function()
 		disable = false,
 	})
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use("marilari88/twoslash-queries.nvim")
 
 	use({
 		"folke/neodev.nvim",
