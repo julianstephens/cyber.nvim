@@ -1,305 +1,310 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 -- Only required if you have packer configured as `opt`
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstrap = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-end
-vim.cmd([[packadd packer.nvim]])
+require("lazy").setup({
+  -- Syntax Highlighting & Visual
+  "kyazdani42/nvim-web-devicons",
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require('core.colorizer')
+    end,
+    event = "BufRead",
+  },
+  {
+    "hoob3rt/lualine.nvim",
+    config = function()
+      require('core.lualine')
+    end,
+    dependencies = {
+      "kyazdani42/nvim-web-devicons",
+    },
+    event = "BufWinEnter",
+  },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('core.bufferline')
+    end,
+  },
+  {
+    "goolord/alpha-nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons" },
+    config = function()
+      require('core.alpha')
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require('core.blankline')
+    end,
+    event = "BufRead",
+  },
+  { "kevinhwang91/nvim-ufo",                     dependencies = { "kevinhwang91/promise-async" }, },
 
-return require("packer").startup(function()
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+  -- Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-github.nvim" },
+    config = function()
+      require('core.telescope')
+    end,
+  },
+  { "nvim-telescope/telescope-ui-select.nvim" },
+  { "nvim-telescope/telescope-file-browser.nvim" },
+  { "nvim-telescope/telescope-project.nvim" },
 
-	-- Syntax Highlighting & Visual
-	use("kyazdani42/nvim-web-devicons")
-	use({
-		"norcalli/nvim-colorizer.lua",
-		config = "require'core.colorizer'",
-		event = "BufRead",
-	})
-	use({
-		"hoob3rt/lualine.nvim",
-		config = "require'core.lualine'",
-		requires = {
-			"kyazdani42/nvim-web-devicons",
-			opt = true,
-		},
-		event = "BufWinEnter",
-	})
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "v2.*",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = "require'core.bufferline'",
-	})
-	use({
-		"goolord/alpha-nvim",
-		requires = { "kyazdani42/nvim-web-devicons" },
-		config = "require'core.alpha'",
-	})
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		config = "require'core.blankline'",
-		event = "BufRead",
-	})
-	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
+  -- -- LSP
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+    config = function()
+      require('core.lspconfig')
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require('core.conform')
+    end,
+  },
+  {
+    "jose-elias-alvarez/nvim-lsp-ts-utils",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require('core.cmp')
+    end,
+  },
+  "hrsh7th/cmp-nvim-lsp",
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-vsnip" },
+  { "hrsh7th/vim-vsnip" },
+  {
+    "windwp/nvim-autopairs",
+    after = { "nvim-cmp" },
+    config = function()
+      require('core.autopairs')
+    end,
+  },
+  { "onsails/lspkind-nvim" },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons" },
+    config = function()
+      require('core.trouble')
+    end,
+  },
+  {
+    "ray-x/go.nvim",
+    config = function()
+      require("go").setup()
+    end,
+  },
+  "ray-x/guihua.lua", -- recommended if need floating window support
 
-	-- Telescope
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-github.nvim" } },
-		config = "require'core.telescope'",
-	})
-	use({ "nvim-telescope/telescope-ui-select.nvim" })
-	use({ "nvim-telescope/telescope-file-browser.nvim" })
-	use({ "nvim-telescope/telescope-project.nvim" })
+  -- Debugging
+  {
+    "mfussenegger/nvim-dap",
+    opt = true,
+    module = { "dap" },
+    dependencies = {
+      "theHamsta/nvim-dap-virtual-text",
+      "mfussenegger/nvim-dap-python",
+      "nvim-telescope/telescope-dap.nvim",
+      { "leoluz/nvim-dap-go",                module = "dap-go" },
+      { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+      { "mxsdev/nvim-dap-vscode-js",         module = { "dap-vscode-js" } },
+      {
+        "microsoft/vscode-js-debug",
+        opt = true,
+        run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+      },
+    },
+    config = function()
+      require('core.dap')
+    end,
+    disable = false,
+  },
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+  "marilari88/twoslash-queries.nvim",
 
-	-- -- LSP
-	use({
-		"neovim/nvim-lspconfig",
-		requires = { { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" } },
-		config = "require'core.lspconfig'",
-	})
-	use({
-		"stevearc/conform.nvim",
-		config = "require'core.conform'",
-	})
-	use({
-		"jose-elias-alvarez/nvim-lsp-ts-utils",
-		requires = { "nvim-lua/plenary.nvim" },
-	})
-	use({
-		"hrsh7th/nvim-cmp",
-		config = "require'core.cmp'",
-	})
-	use("hrsh7th/cmp-nvim-lsp")
-	use({ "hrsh7th/cmp-buffer" })
-	use({ "hrsh7th/cmp-vsnip" })
-	use({ "hrsh7th/vim-vsnip" })
-	-- use({
-	-- 	"pmizio/typescript-tools.nvim",
-	-- 	requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-	-- 	config = function()
-	-- 		require("typescript-tools").setup({})
-	-- 	end,
-	-- })
+  {
+    "folke/neodev.nvim",
+    config = function()
+      require("neodev").setup({
+        library = { plugins = { "nvim-dap-ui" }, types = true },
+      })
+    end,
+  },
 
-	use({
-		"windwp/nvim-autopairs",
-		after = { "nvim-cmp" },
-		config = "require'core.autopairs'",
-	})
-	use({ "onsails/lspkind-nvim" })
-	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = "require'core.trouble'",
-	})
-	use({
-		"ray-x/go.nvim",
-		config = function()
-			require("go").setup()
-		end,
-	})
-	use("ray-x/guihua.lua") -- recommended if need floating window support
+  -- Todo
+  {
+    "folke/todo-comments.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
+  {
+    "JellyApple102/flote.nvim",
+    config = function()
+      require("flote").setup()
+    end,
+  },
+  {
+    "nocksock/do.nvim",
+    config = function()
+      require("do").setup({
+        winbar = true,
+        kaomoji_mode = 1,
+      })
+    end,
+  },
 
-	-- Debugging
-	use({
-		"mfussenegger/nvim-dap",
-		opt = true,
-		module = { "dap" },
-		requires = {
-			"theHamsta/nvim-dap-virtual-text",
-			"mfussenegger/nvim-dap-python",
-			"nvim-telescope/telescope-dap.nvim",
-			{ "leoluz/nvim-dap-go", module = "dap-go" },
-			{ "jbyuki/one-small-step-for-vimkind", module = "osv" },
-			{ "mxsdev/nvim-dap-vscode-js", module = { "dap-vscode-js" } },
-			{
-				"microsoft/vscode-js-debug",
-				opt = true,
-				run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-			},
-		},
-		config = "require 'core.dap'",
-		disable = false,
-	})
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("marilari88/twoslash-queries.nvim")
+  -- -- Themes
+  "folke/tokyonight.nvim",
+  "tiagovla/tokyodark.nvim",
 
-	use({
-		"folke/neodev.nvim",
-		config = function()
-			require("neodev").setup({
-				library = { plugins = { "nvim-dap-ui" }, types = true },
-			})
-		end,
-	})
+  -- -- TreeSitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = "BufWinEnter",
+    run = ":TSUpdate",
+    config = function()
+      require('core.treesitter')
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    after = "nvim-treesitter",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter",
+  },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup()
+    end,
+    after = "nvim-treesitter",
+  },
 
-	-- Todo
-	use({
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup()
-		end,
-	})
-	use({
-		"JellyApple102/flote.nvim",
-		config = function()
-			require("flote").setup()
-		end,
-	})
-	use({
-		"nocksock/do.nvim",
-		config = function()
-			require("do").setup({
-				winbar = true,
-				kaomoji_mode = 1,
-			})
-		end,
-	})
+  -- Writing
+  "junegunn/goyo.vim",
+  "junegunn/limelight.vim",
+  {
+    "preservim/vim-pencil",
+    config = function()
+      require('core.pencil')
+    end,
+  },
+  {
+    "gaoDean/autolist.nvim",
+    config = function()
+      require("autolist").setup({})
+    end,
+  },
+  "allen-mack/nvim-table-md",
 
-	-- -- Themes
-	use("folke/tokyonight.nvim")
-	use("tiagovla/tokyodark.nvim")
+  -- -- Miscellaneous
+  {
+    "ellisonleao/glow.nvim",
+    config = function()
+      require("glow").setup({
+        width = 120,
+      })
+    end,
+  },
+  {
+    "terrortylor/nvim-comment",
+    cmd = "CommentToggle",
+    config = function()
+      require('core.comment')
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    event = "BufWinEnter",
+    config = function()
+      require('core.whichkey')
+    end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require('core.gitsigns')
+    end,
+  },
+  {
+    "danymat/neogen",
+    config = function()
+      require("neogen").setup({
+        enabled = true,
+        languages = {
+          typescript = {
+            template = {
+              annotation_convention = "tsdoc",
+            },
+          },
+        },
+      })
+    end,
+    after = "nvim-treesitter",
+  },
+  "tpope/vim-repeat",
+  { "mrjones2014/legendary.nvim" },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("toggleterm").setup()
+    end,
+  },
+  {
+    "ggandor/lightspeed.nvim",
+    config = function()
+      require('core.lightspeed')
+    end,
+  },
+  {
+    "phaazon/hop.nvim",
+    config = function()
+      require("hop").setup()
+    end,
+  },
 
-	-- -- TreeSitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		event = "BufWinEnter",
-		run = ":TSUpdate",
-		config = "require'core.treesitter'",
-	})
-	use({
-		"windwp/nvim-ts-autotag",
-		after = "nvim-treesitter",
-	})
-	use({
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		after = "nvim-treesitter",
-	})
-	use({
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		after = "nvim-treesitter",
-	})
-	use({
-		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			require("treesitter-context").setup()
-		end,
-		after = "nvim-treesitter",
-	})
-
-	-- Writing
-	use("junegunn/goyo.vim")
-	use("junegunn/limelight.vim")
-	use({
-		"preservim/vim-pencil",
-		config = "require'core.pencil'",
-	})
-	use({
-		"gaoDean/autolist.nvim",
-		config = function()
-			require("autolist").setup({})
-		end,
-	})
-	use("allen-mack/nvim-table-md")
-
-	-- -- Miscellaneous
-	use({
-		"ellisonleao/glow.nvim",
-		config = function()
-			require("glow").setup({
-				width = 120,
-			})
-		end,
-	})
-	use({
-		"terrortylor/nvim-comment",
-		cmd = "CommentToggle",
-		config = "require'core.comment'",
-	})
-	use({
-		"folke/which-key.nvim",
-		event = "BufWinEnter",
-		config = "require'core.whichkey'",
-	})
-	use({
-		"lewis6991/gitsigns.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-		config = "require'core.gitsigns'",
-	})
-	use({
-		"danymat/neogen",
-		config = function()
-			require("neogen").setup({
-				enabled = true,
-				languages = {
-					typescript = {
-						template = {
-							annotation_convention = "tsdoc",
-						},
-					},
-				},
-			})
-		end,
-		after = "nvim-treesitter",
-	})
-	use("tpope/vim-repeat")
-	use({ "mrjones2014/legendary.nvim" })
-	use({
-		"akinsho/toggleterm.nvim",
-		tag = "*",
-		config = function()
-			require("toggleterm").setup()
-		end,
-	})
-	use({
-		"ggandor/lightspeed.nvim",
-		config = "require'core.lightspeed'",
-	})
-	use({
-		"phaazon/hop.nvim",
-		config = function()
-			require("hop").setup()
-		end,
-	})
-
-	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-		},
-		config = function()
-			require("neo-tree").setup({
-				window = {
-					filesystem = {
-						filtered_items = {
-							hide_dotfiles = false,
-							hide_hidden = false,
-							hide_by_name = {
-								"node_modules",
-							},
-						},
-					},
-				},
-			})
-		end,
-	})
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("neo-tree").setup({
+        window = {
+          filesystem = {
+            filtered_items = {
+              hide_dotfiles = false,
+              hide_hidden = false,
+              hide_by_name = {
+                "node_modules",
+              },
+            },
+          },
+        },
+      })
+    end,
+  },
+})

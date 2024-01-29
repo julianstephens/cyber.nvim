@@ -44,11 +44,11 @@ local mappings = {
     f = { ":ToggleTerm direction=float<CR>", "Floating terminal" },
   },
   ["<leader>p"] = {
-    name = "+Packer",
-    s = { ":PackerSync<CR>", "Sync plugins" },
-    i = { ":PackerInstall<CR>", "Install plugins" },
-    c = { ":PackerClean<CR>", "Clean plugins" },
-    u = { ":PackerUpdate<CR>", "Update plugins" },
+    name = "+Lazy",
+    s = { ":Lazy sync<CR>", "Sync plugins" },
+    i = { ":Lazy install<CR>", "Install plugins" },
+    c = { ":Lazy clean<CR>", "Clean plugins" },
+    u = { ":Lazy update<CR>", "Update plugins" },
   },
   ["<leader>l"] = {
     name = "+LSP",
