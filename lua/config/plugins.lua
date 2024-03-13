@@ -1,8 +1,8 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 -- Only required if you have packer configured as `opt`
 require("lazy").setup({
+  { "nvim-tree/nvim-web-devicons" },
   -- Syntax Highlighting & Visual
-  "kyazdani42/nvim-web-devicons",
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -15,9 +15,6 @@ require("lazy").setup({
     config = function()
       require('core.lualine')
     end,
-    dependencies = {
-      "kyazdani42/nvim-web-devicons",
-    },
     event = "BufWinEnter",
   },
   {
@@ -30,7 +27,6 @@ require("lazy").setup({
   },
   {
     "goolord/alpha-nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
     config = function()
       require('core.alpha')
     end,
@@ -42,8 +38,10 @@ require("lazy").setup({
     end,
     event = "BufRead",
   },
-  { "kevinhwang91/nvim-ufo",                     dependencies = { "kevinhwang91/promise-async" }, },
-
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+  },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -94,7 +92,6 @@ require("lazy").setup({
   { "onsails/lspkind-nvim" },
   {
     "folke/trouble.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
     config = function()
       require('core.trouble')
     end,
@@ -151,10 +148,16 @@ require("lazy").setup({
     end,
   },
   {
-    "JellyApple102/flote.nvim",
+    "RutaTang/quicknote.nvim",
     config = function()
-      require("flote").setup()
-    end,
+      -- you must call setup to let quicknote.nvim works correctly
+      require("quicknote").setup({
+        mode = "portable",
+        git_branch_recognizable = false,
+      })
+    end
+    ,
+    dependencies = { "nvim-lua/plenary.nvim" }
   },
   {
     "nocksock/do.nvim",
@@ -188,7 +191,7 @@ require("lazy").setup({
     after = "nvim-treesitter",
   },
   {
-    "JoosepAlviste/nvim-ts-context-commentstring",
+    'JoosepAlviste/nvim-ts-context-commentstring',
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -222,6 +225,20 @@ require("lazy").setup({
       require("glow").setup({
         width = 120,
       })
+    end,
+  },
+
+  {
+    "gaoDean/autolist.nvim",
+    ft = {
+      "markdown",
+      "text",
+      "tex",
+      "plaintex",
+      "norg",
+    },
+    config = function()
+      require("core.autolist")
     end,
   },
   {
@@ -288,7 +305,6 @@ require("lazy").setup({
     branch = "v2.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
     config = function()

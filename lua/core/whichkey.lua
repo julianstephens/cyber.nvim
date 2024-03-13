@@ -17,10 +17,9 @@ local mappings = {
     n = { ":Neotree<CR>", "File Tree" },
     g = { "<cmd>Telescope live_grep prompt_prefix=🔍<CR>", "Grep" },
     h = { "<cmd>Telescope oldfiles prompt_prefix=🔍<CR>", "History" },
-    b = { "<cmd>Telescope buffers prompt_prefix=🔍<CR>", "Buffers" },
     p = { ":lua require'telescope'.extensions.project.project{}<CR>", "Projects" },
-    v = { ":Telescope env<CR>", "Env Vars" },
     t = { ":TodoTelescope<CR>", "Todo" },
+    q = { ":<cmd>Telescope quicknote<CR>", "Quicknote" },
   },
   ["<leader>g"] = {
     name = "+Git",
@@ -64,10 +63,9 @@ local mappings = {
     t = { ":TodoTrouble<CR>", "View todos" },
   },
   ["<leader>n"] = {
-    name = "+Flote",
-    n = { ":Flote<CR>", "Open project note" },
-    g = { ":Flote global<CR>", "Open global note" },
-    l = { ":Flote manage<CR>", "View all notes" },
+    name = "+Quicknote",
+    n = { "<cmd>:lua require('quicknote').OpenNoteAtCWD()<CR>", "Open project note" },
+    c = { "<cmd>:lua require('quicknote').NewNoteAtCWD()<CR>", "Create project note" },
   },
   ["m"] = {
     name = "+Markdown",
