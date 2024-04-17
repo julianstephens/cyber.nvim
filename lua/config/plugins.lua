@@ -104,40 +104,6 @@ require("lazy").setup({
   },
   "ray-x/guihua.lua", -- recommended if need floating window support
 
-  -- Debugging
-  {
-    "mfussenegger/nvim-dap",
-    opt = true,
-    module = { "dap" },
-    dependencies = {
-      "theHamsta/nvim-dap-virtual-text",
-      "mfussenegger/nvim-dap-python",
-      "nvim-telescope/telescope-dap.nvim",
-      { "leoluz/nvim-dap-go",                module = "dap-go" },
-      { "jbyuki/one-small-step-for-vimkind", module = "osv" },
-      { "mxsdev/nvim-dap-vscode-js",         module = { "dap-vscode-js" } },
-      {
-        "microsoft/vscode-js-debug",
-        opt = true,
-        run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-      },
-    },
-    config = function()
-      require('core.dap')
-    end,
-    disable = false,
-  },
-  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
-  "marilari88/twoslash-queries.nvim",
-
-  {
-    "folke/neodev.nvim",
-    config = function()
-      require("neodev").setup({
-        library = { plugins = { "nvim-dap-ui" }, types = true },
-      })
-    end,
-  },
 
   -- Todo
   {
@@ -152,21 +118,12 @@ require("lazy").setup({
     config = function()
       -- you must call setup to let quicknote.nvim works correctly
       require("quicknote").setup({
-        mode = "portable",
+        mode = "resident",
         git_branch_recognizable = false,
       })
     end
     ,
     dependencies = { "nvim-lua/plenary.nvim" }
-  },
-  {
-    "nocksock/do.nvim",
-    config = function()
-      require("do").setup({
-        winbar = true,
-        kaomoji_mode = 1,
-      })
-    end,
   },
 
   -- -- Themes
@@ -218,7 +175,7 @@ require("lazy").setup({
   },
   "allen-mack/nvim-table-md",
 
-  -- -- Miscellaneous
+  -- Miscellaneous
   {
     "ellisonleao/glow.nvim",
     config = function()

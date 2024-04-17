@@ -51,8 +51,8 @@ local mappings = {
   },
   ["<leader>l"] = {
     name = "+LSP",
-    i = { ":NullLsInfo<CR>", "View language servers" },
-    l = { ":NullLsLog<CR>", "View language servers" },
+    i = { ":LspInfo<CR>", "View language servers" },
+    l = { ":LspLog<CR>", "View language server log" },
   },
   ["<leader>o"] = {
     name = "+Trouble",
