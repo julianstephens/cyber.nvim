@@ -80,8 +80,14 @@ require("lazy").setup({
 	},
 	"hrsh7th/cmp-nvim-lsp",
 	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-vsnip" },
-	{ "hrsh7th/vim-vsnip" },
+	{ "saadparwaiz1/cmp_luasnip" },
+	{
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+	},
 	{
 		"windwp/nvim-autopairs",
 		after = { "nvim-cmp" },
@@ -286,8 +292,5 @@ require("lazy").setup({
 		config = function()
 			require("window-picker").setup()
 		end,
-	},
-	{
-		"github/copilot.vim",
 	},
 })
