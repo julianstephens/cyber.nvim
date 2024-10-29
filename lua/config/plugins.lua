@@ -72,12 +72,6 @@ require("lazy").setup({
 		"jose-elias-alvarez/nvim-lsp-ts-utils",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
-	{
-		"hrsh7th/nvim-cmp",
-		config = function()
-			require("core.cmp")
-		end,
-	},
 	"hrsh7th/cmp-nvim-lsp",
 	{ "hrsh7th/cmp-buffer" },
 	{ "saadparwaiz1/cmp_luasnip" },
@@ -87,6 +81,16 @@ require("lazy").setup({
 		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 		-- install jsregexp (optional!).
 		build = "make install_jsregexp",
+		dependencies = { "molleweide/LuaSnip-snippets.nvim", "rafamadriz/friendly-snippets" },
+		config = function()
+			require("core.luasnip")
+		end,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		config = function()
+			require("core.cmp")
+		end,
 	},
 	{
 		"windwp/nvim-autopairs",
