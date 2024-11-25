@@ -15,6 +15,9 @@ local language_servers = {
 	astro = {
 		enabled = true,
 	},
+	taplo = {
+		enabled = true,
+	},
 	lua_ls = {
 		enabled = true,
 	},
@@ -39,7 +42,7 @@ local language_servers = {
 	pylsp = {
 		enabled = false,
 	},
-	ruff_lsp = {
+	ruff = {
 		enabled = true,
 	},
 	vimls = {
@@ -101,22 +104,7 @@ local language_servers = {
 	},
 }
 
-local function get_python_path(workspace)
-	-- Use activated virtualenv.
-	if vim.env.VIRTUAL_ENV then
-		return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
-	end
-	-- Find and use virtualenv in workspace directory.
-	for _, pattern in ipairs({ "*", ".*" }) do
-		local match = vim.fn.glob(path.join(workspace, pattern, "pyvenv.cfg"))
-		if match ~= "" then
-			return path.join(path.dirname(match), "bin", "python")
-		end
-	end
-	-- Fallback to system Python.
-	return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
-end
-
+-- Use activated virtualenv.
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -175,50 +163,6 @@ for ls, props in pairs(language_servers) do
 	end
 end
 
-local buf_map = function(bufnr, mode, lhs, rhs, opts)
-	vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
-		silent = true,
-	})
-end
-
--- lspconfig.vtsls.setup({
--- 	refactor_auto_rename = true,
--- 	on_attach = function(client, bufnr)
--- 		require("twoslash-queries").attach(client, bufnr)
-
--- 		client.server_capabilities.documentFormattingProvider = false
--- 		client.server_capabilities.document_range_formatting = false
-
--- 		local ts_utils = require("nvim-lsp-ts-utils")
--- 		ts_utils.setup({
--- 			update_imports_on_move = true,
--- 		})
--- 		ts_utils.setup_client(client)
-
--- 		buf_map(bufnr, "n", "io", ":TSLspOrganize<cr>")
--- 		buf_map(bufnr, "n", "ia", ":TSLspImportAll<cr>")
--- 		-- vim.cmd("autocmd BufWritePre <buffer> ")
-
--- 		on_attach(client, bufnr)
--- 	end,
--- 	handlers = {
--- 		["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
--- 			-- Disable virtual_text
--- 			virtual_text = false,
--- 		}),
--- 	},
--- 	capabilities = capabilities,
--- 	settings = {
--- 		vtsls = {
--- 			experimental = {
--- 				completion = {
--- 					enableServerSideFuzzyMatch = true,
--- 				},
--- 			},
--- 		},
--- 	},
--- })
-
 vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
 	local locations = command.arguments[3]
 	local client = vim.lsp.get_client_by_id(ctx.client_id)
@@ -229,20 +173,7 @@ vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
 	end
 end
 
--- ruff
-lspconfig.ruff_lsp.setup({
-	on_attach = function(client, bufnr)
-		if client.name == "ruff_lsp" then
-			-- Disable hover in favor of Pyright
-			client.server_capabilities.hoverProvider = false
-		end
-	end,
-})
-
 vim.diagnostic.config({ virtual_text = false })
-
--- pyright
--- lspconfig.pyright.setup({})
 
 local signs = {
 	Error = " ",
