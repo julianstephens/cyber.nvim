@@ -1,0 +1,30 @@
+{
+  "ir with fmt": {
+    "prefix": "irc",
+    "body": [
+      "if err != nil {",
+      "\treturn fmt.Errorf(\"$1\")",
+      "}"
+    ],
+    "description": "Snippet for if err != nil with fmt.Errorf"
+  },
+  "ir with t.Fatal": {
+    "prefix": "irt",
+    "body": [
+      "if err != nil {",
+      "\tt.Fatal(err)",
+      "}"
+    ],
+    "description": "Snippet for if err != nil with t.Fatal"
+  },
+  "iota const generator": {
+    "prefix": "iota",
+    "body": [
+      "type ${1:type} int",
+      "const (",
+      "\t$2 ${1:type} = 1 << iota",
+      "\t$3",
+      ")"
+    ]
+  }
+}

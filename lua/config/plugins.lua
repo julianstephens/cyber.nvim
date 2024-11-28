@@ -297,4 +297,13 @@ require("lazy").setup({
 			require("window-picker").setup()
 		end,
 	},
+	{
+		"vyfor/cord.nvim",
+		build = "./build || .\\build",
+		event = "VeryLazy",
+		opts = {}, -- calls require('cord').setup()
+		config = function()
+			require("core.cord")
+		end,
+	},
 })

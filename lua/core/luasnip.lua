@@ -1,5 +1,7 @@
 local ls = require("luasnip")
 
+ls.log.set_loglevel("info")
+
 vim.keymap.set({ "i" }, "<C-K>", function()
 	ls.expand()
 end, { silent = true })
@@ -16,4 +18,5 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
 	end
 end, { silent = true })
 
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
 require("luasnip.loaders.from_vscode").lazy_load()
