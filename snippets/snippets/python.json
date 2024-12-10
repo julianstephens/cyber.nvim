@@ -4,5 +4,11 @@
     "body": [
       "# type: ignore"
     ]
+  },
+  "now()": {
+    "prefix": "now",
+    "body": [
+      "datetime.now()"
+    ]
   }
 }
