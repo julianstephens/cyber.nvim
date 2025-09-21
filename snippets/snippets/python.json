@@ -14,7 +14,7 @@
   "CurrentUser": {
     "prefix": "cu",
     "body": [
-      "current_user: Annotated[User, Security(get_current_user, scopes=[${0}])]"
+      "current_user: Annotated[User, Security(get_current_user, scopes=[${0}])],"
     ]
   }
 }

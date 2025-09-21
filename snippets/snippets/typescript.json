@@ -1,0 +1,16 @@
+{
+  "requests handler": {
+    "prefix": "req",
+    "body": [
+      "async (req: Request, res: Response) => {${0}}"
+    ]
+  },
+  "main function": {
+    "prefix": "main",
+    "body": [
+      "const main = async () => {${0}}",
+      "",
+      "await main()"
+    ]
+  }
+}

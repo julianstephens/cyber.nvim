@@ -35,6 +35,7 @@ cmp.setup({
 			with_text = true,
 			mode = "symbol",
 			menu = {
+				copilot = "[Copilot]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[LSnip]",
 				buffer = "[Buffer]",
@@ -68,6 +69,9 @@ cmp.setup({
 	}),
 	sources = {
 		{
+			name = "copilot",
+		},
+		{
 			name = "nvim_lsp",
 		},
 		{
@@ -89,6 +93,7 @@ cmp.setup({
 require("cmp").setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
+		{ name = "copilot" },
 		{ name = "nvim_lsp_document_symbol" },
 	}, {
 		{ name = "buffer" },

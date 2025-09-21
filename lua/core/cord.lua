@@ -41,11 +41,11 @@ require("cord").setup({
 		vcs = "Committing changes in {}",
 		workspace = "In {}",
 	},
-	buttons = {
-		{
-			label = "View Repository",
-			url = "git",
-		},
-	},
+	-- buttons = {
+	-- 	{
+	-- 		label = "View Repository",
+	-- 		url = "git",
+	-- 	},
+	-- },
 	assets = nil,
 })

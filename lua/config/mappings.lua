@@ -1,6 +1,5 @@
 local M = {}
 
-vim.g.mapleader = " "
 
 local generic_opts_any = {
 	noremap = true,

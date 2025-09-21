@@ -1,6 +1,4 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
--- Only required if you have packer configured as `opt`
-require("lazy").setup({
+return {
 	{ "nvim-tree/nvim-web-devicons" },
 	-- Syntax Highlighting & Visual
 	{
@@ -298,15 +296,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"vyfor/cord.nvim",
-		build = "./build || .\\build",
-		event = "VeryLazy",
-		opts = {}, -- calls require('cord').setup()
-		config = function()
-			require("core.cord")
-		end,
-	},
-	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
 		opts = {},
@@ -314,4 +303,27 @@ require("lazy").setup({
 			require("lsp_signature").setup(opts)
 		end,
 	},
-})
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		opts = {},
+		config = function(_, opts)
+			require("copilot").setup(opts)
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		opts = {},
+	},
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim", branch = "master" },
+		},
+		build = "make tiktoken",
+		opts = {
+			-- See Configuration section for options
+		},
+	},
+}

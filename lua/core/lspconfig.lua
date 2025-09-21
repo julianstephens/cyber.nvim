@@ -18,6 +18,9 @@ local language_servers = {
 	taplo = {
 		enabled = true,
 	},
+	terraformls = {
+		enabled = true,
+	},
 	lua_ls = {
 		enabled = true,
 	},
@@ -104,6 +107,15 @@ local language_servers = {
 	},
 }
 
+local function organize_imports()
+	local params = {
+		command = "_typescript.organizeImports",
+		arguments = { vim.api.nvim_buf_get_name(0) },
+		title = "",
+	}
+	vim.lsp.buf.execute_command(params)
+end
+
 -- Use activated virtualenv.
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -163,6 +175,21 @@ for ls, props in pairs(language_servers) do
 	end
 end
 
+lspconfig["ts_ls"].setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	commands = {
+		OrganizeImports = {
+			organize_imports,
+			description = "Organize Imports",
+		},
+	},
+})
+-- vim.api.nvim_create_autocmd(
+-- 	"BufWritePost",
+-- 	{ pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" }, command = 'execute "OrganizeImports"' }
+-- )
+
 vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
 	local locations = command.arguments[3]
 	local client = vim.lsp.get_client_by_id(ctx.client_id)
@@ -181,6 +208,7 @@ local signs = {
 	Hint = " ",
 	Info = " ",
 }
+
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, {
@@ -194,9 +222,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if vim.tbl_contains({ "null-ls" }, client.name) then -- blacklist lsp
-			return
-		end
 		require("lsp_signature").on_attach({
 			bind = true,
 			handler_opts = {

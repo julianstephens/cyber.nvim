@@ -3,6 +3,11 @@ local wk = require("which-key")
 wk.setup()
 
 local mappings = {
+	{
+		"<leader>ccq",
+		"<cmd>lua require'CopilotChat'.ask(vim.fn.input('Quick Chat: '), {selection = require('CopilotChat.select').buffer})<CR>",
+		{ desc = "CopilotChat - Quick chat" },
+	},
 	{ "<leader>f", group = "Files", remap = false },
 	{ "<leader>fe", "<cmd>Telescope file_browser prompt_prefix=🔍<CR>", desc = "Explorer", remap = false },
 	{ "<leader>ff", "<cmd>Telescope find_files prompt_prefix=🔍<CR>", desc = "Finder", remap = false },
