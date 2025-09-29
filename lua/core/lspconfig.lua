@@ -9,8 +9,6 @@ local capabilities = vim.tbl_deep_extend(
 )
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local lspconfig = require("lspconfig")
-
 local language_servers = {
 	astro = {
 		enabled = true,
@@ -166,16 +164,18 @@ local on_attach = function(client, bufnr)
 	vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })")
 end
 
-for ls, props in pairs(language_servers) do
-	if props.enabled == true then
-		lspconfig[ls].setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-		})
+vim.lsp.config("*", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
+for server, config in pairs(language_servers) do
+	if config.enabled then
+		vim.lsp.enable(server)
 	end
 end
 
-lspconfig["ts_ls"].setup({
+vim.lsp.config("ts_ls", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	commands = {
