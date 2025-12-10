@@ -52,7 +52,7 @@ return {
 	{ "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-telescope/telescope-project.nvim" },
 
-	-- -- LSP
+	-- LSP
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
@@ -220,10 +220,9 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("core.gitsigns")
-		end,
+		-- config = function()
+		-- 	require("core.gitsigns")
+		-- end,
 	},
 	{
 		"danymat/neogen",

@@ -8,4 +8,5 @@ require("gitsigns").setup({
 	sign_priority = 6,
 	update_debounce = 200,
 	status_formatter = nil,
+	current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
 })

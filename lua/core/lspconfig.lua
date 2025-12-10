@@ -161,7 +161,9 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 
-	vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })")
+	vim.cmd(
+		"autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false, close_events = { 'CursorMoved', 'BufLeave', 'WinLeave', 'LspDetach' } })"
+	)
 end
 
 vim.lsp.config("*", {
