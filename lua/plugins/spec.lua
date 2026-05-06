@@ -138,7 +138,8 @@ return {
 
 	-- -- TreeSitter
 	{
-		"nvim-treesitter/nvim-treesitter",
+		"folke/nvim-treesitter",
+		branch = "master",
 		event = "BufWinEnter",
 		run = ":TSUpdate",
 		config = function()
