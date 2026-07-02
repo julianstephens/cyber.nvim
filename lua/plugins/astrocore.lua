@@ -78,13 +78,17 @@ return {
         ["<leader>qq"] = "<cmd>q!<CR>",
         ["vs"] = "<cmd>vs<CR>",
         ["sp"] = "<cmd>sp<CR>",
-        ["<Leader>hh"] = "<cmd>nohl<CR>",
+        -- ["<Leader>hh"] = "<cmd>nohl<CR>",
         ["<C-h>"] = "<C-w>h",
         ["<C-j>"] = "<C-w>j",
         ["<C-k>"] = "<C-w>k",
         ["<C-l>"] = "<C-w>l",
         ["mw"] = "<cmd>HopWord<CR>",
         ["ml"] = "<cmd>HopLine<CR>",
+        ["<leader>gi"] = { function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+        ["<leader>gI"] = { function() Snacks.picker.gh_issue { state = "all" } end, desc = "GitHub Issues (all)" },
+        ["<leader>gP"] = { function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
