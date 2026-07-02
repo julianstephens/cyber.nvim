@@ -89,7 +89,23 @@ return {
         ["<Leader>gI"] = { function() Snacks.picker.gh_issue { state = "all" } end, desc = "GitHub Issues (all)" },
         ["<Leader>gP"] = { function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
 
-        ["K"] = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
+        ["K"] = {
+          function()
+            -- 1. Get the current line number (0-indexed)
+            local line = vim.api.nvim_win_get_cursor(0)[1] - 1
+
+            -- 2. Fetch all diagnostics for the current line
+            local opts = { winnr = 0 }
+            local diagnostics = vim.diagnostic.get(0, { lnum = line })
+
+            -- 3. If there are diagnostics, open the float
+            if #diagnostics > 0 then vim.diagnostic.open_float(nil, { focus = false }) end
+
+            -- 4. Trigger the standard LSP hover
+            vim.lsp.buf.hover()
+          end,
+          desc = "Show LSP hover and line diagnostics",
+        },
 
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
