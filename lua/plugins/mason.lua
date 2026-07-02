@@ -20,7 +20,7 @@ return {
 
         -- install any other package
         "tree-sitter-cli",
-
+        "ruff",
         "pyright",
         "gopls",
         "typescript-language-server",

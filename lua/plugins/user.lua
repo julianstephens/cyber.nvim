@@ -61,6 +61,16 @@ return {
           { section = "startup" },
         },
       },
+      lazygit = {
+        configure = true,
+      },
+      gh = {},
+      picker = {
+        sources = {
+          gh_issue = {},
+          gh_pr = {},
+        },
+      },
     },
   },
 
