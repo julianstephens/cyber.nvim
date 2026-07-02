@@ -29,5 +29,5 @@ require("lazy").setup({
       },
     },
   },
-  concurrency = 0,
+  concurrency = 1,
 } --[[@as LazyConfig]])
