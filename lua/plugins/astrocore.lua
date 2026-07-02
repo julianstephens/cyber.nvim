@@ -85,9 +85,11 @@ return {
         ["<C-l>"] = "<C-w>l",
         ["mw"] = "<cmd>HopWord<CR>",
         ["ml"] = "<cmd>HopLine<CR>",
-        ["<leader>gi"] = { function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
-        ["<leader>gI"] = { function() Snacks.picker.gh_issue { state = "all" } end, desc = "GitHub Issues (all)" },
-        ["<leader>gP"] = { function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+        ["<Leader>gi"] = { function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+        ["<Leader>gI"] = { function() Snacks.picker.gh_issue { state = "all" } end, desc = "GitHub Issues (all)" },
+        ["<Leader>gP"] = { function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+
+        ["K"] = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
 
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
