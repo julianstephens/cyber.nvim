@@ -10,7 +10,6 @@ return {
       -- Make sure to use the names found in `:Mason`
       ensure_installed = {
         -- install language servers
-        "lua-language-server",
 
         -- install formatters
         "stylua",
@@ -21,11 +20,6 @@ return {
         -- install any other package
         "tree-sitter-cli",
         "ruff",
-        "pyright",
-        "gopls",
-        "typescript-language-server",
-        "json-lsp",
-        "terraform-ls",
       },
     },
   },
