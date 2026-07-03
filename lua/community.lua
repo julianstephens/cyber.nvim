@@ -6,8 +6,17 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.go" },
-  -- import/override with your plugins folder
+  { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.prettier" },
+  { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.terraform" },
+  { import = "astrocommunity.pack.toml" },
+  { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
   { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
+  { import = "astrocommunity.recipes.auto-session-restore" },
+  -- import/override with your plugins folder
 }

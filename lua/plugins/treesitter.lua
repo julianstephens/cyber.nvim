@@ -15,14 +15,6 @@ return {
       ensure_installed = {
         "lua",
         "vim",
-        "go",
-        "python",
-        "json",
-        "markdown",
-        "toml",
-        "terraform",
-        "typescript",
-        "javascript",
         -- add more arguments for adding more treesitter parsers
       },
     },
