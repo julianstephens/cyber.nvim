@@ -22,7 +22,6 @@ return {
         "tree-sitter-cli",
         "ruff",
         "pyright",
-        "gopls",
         "typescript-language-server",
         "json-lsp",
         "terraform-ls",

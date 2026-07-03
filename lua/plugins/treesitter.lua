@@ -23,7 +23,6 @@ return {
         "terraform",
         "typescript",
         "javascript",
-        "typescriptreact",
         -- add more arguments for adding more treesitter parsers
       },
     },
