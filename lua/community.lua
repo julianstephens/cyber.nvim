@@ -20,5 +20,6 @@ return {
   { import = "astrocommunity.recipes.auto-session-restore" },
   { import = "astrocommunity.editing-support.auto-save-nvim" },
   { import = "astrocommunity.diagnostics.trouble-nvim" },
+  { import = "astrocommunity.completion.blink-copilot" },
   -- import/override with your plugins folder
 }
