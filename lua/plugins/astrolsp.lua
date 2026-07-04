@@ -37,9 +37,7 @@ return {
       -- end
     },
     -- enable servers that you already have installed without mason
-    servers = {
-      -- "pyright"
-    },
+    servers = {},
     -- customize language server configuration passed to `vim.lsp.config`
     -- client specific configuration can also go in `lsp/` in your configuration root (see `:h lsp-config`)
     config = {
@@ -98,6 +96,17 @@ return {
     on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
+      if client.name == "ruff" or client.name == "ruff_lsp" then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.buf.code_action {
+              context = { only = { "source.fixAll.ruff" } },
+              apply = true,
+            }
+          end,
+        })
+      end
     end,
   },
 }
