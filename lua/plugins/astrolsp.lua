@@ -96,6 +96,11 @@ return {
     on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
+      if client.name == "gopls" then
+        -- Work around intermittent gopls signature-help failures on selector expressions.
+        client.server_capabilities.signatureHelpProvider = nil
+      end
+
       if client.name == "ruff" or client.name == "ruff_lsp" then
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = bufnr,
@@ -103,9 +108,16 @@ return {
             vim.lsp.buf.code_action {
               context = { only = { "source.fixAll.ruff" } },
               apply = true,
-            }
-          end,
+          }
+        end,
         })
+      end
+
+      if client.name == "marksman" then
+          local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
+          if buftype ~= "" then
+            vim.lsp.buf_detach_client(bufnr, client.id)
+          end
       end
     end,
   },
