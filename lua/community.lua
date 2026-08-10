@@ -18,6 +18,7 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.pack.sql" },
+  { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.lsp.lspsaga-nvim" },
   { import = "astrocommunity.test.neotest" },
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
