@@ -19,6 +19,7 @@ return {
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.pack.sql" },
   { import = "astrocommunity.pack.rust" },
+  { import = "astrocommunity.pack.oxlint" },
   { import = "astrocommunity.lsp.lspsaga-nvim" },
   { import = "astrocommunity.test.neotest" },
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
